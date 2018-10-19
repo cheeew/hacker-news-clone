@@ -78,6 +78,16 @@ header {
   box-sizing: border-box;
 }
 
+.link {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.active-link {
+  color: white;
+  font-weight: bold;
+}
+
 .user-portal {
   flex: 0;
   display: flex;
