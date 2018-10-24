@@ -10,6 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 }
 
 /* Header Component Styles */
@@ -103,9 +104,10 @@ header {
 .canvas {
   background-color: #F6F6EF;
   height: 100vh;
-  width: 100%;
+  max-width: 100%;
   padding: 10px 0 10px 10px;
-  box-sizing: border-box;
+  display: flex;
+  padding-bottom: 50px;
 }
 
 .canvas p {
@@ -113,41 +115,111 @@ header {
   font-size: 14px;
   padding-bottom: 8px; 
 }
+  /* Button styles */
+.button-container {
+  display: flex; 
+  justify-content: flex-end;
+  flex: 0;
+  height: 30px;
+}
+
+.button-background {
+  border-radius: 3px;
+  border: 1px solid #FF6600; 
+  color: #FF6600; 
+  transition: color 300ms ease;
+  position: relative;
+  box-sizing: border-box;
+  padding: 5px 5px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+}
+
+.button-background:hover {
+  cursor: pointer;
+  color: white;
+}
+
+.button-background:focus {
+  outline: none;
+}
+
+.button-background:before {
+  content: "";
+  position: absolute;
+  background: #FF6600;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 0;
+  transition: top 300ms ease;
+  border-radius: 1px;
+}
+
+.button-background:hover:before {
+  top: 0;
+}
+
+.button-background span {
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 700;
+}
 
 /* PostListing Component Styles */
 .post-wrapper {
   padding-bottom: 5px;
-}
-
-.post-wrapper ul {
   list-style: none;
   padding: 0 0;
   margin: 0 0;
   display: flex;
+  flex-direction: column;
   font-size: 14px;
+  flex: 1;
+  order: -1;
 }
 
-.post-wrapper ul li, .post-wrapper span {
+.post-wrapper li {
+  margin-bottom: 8px;
+}
+
+.post p, .post-options span, 
+.post-options p {
   margin: 0 2px;
 }
 
-  /* <div className="post"> styles */
+.post p, .post-options p {
+  padding: 0 0;
+}
 
-.post li ~ li:hover {
+  /* <div className="post"> styles */
+.post {
+  display: flex;
+}
+
+.post p ~ p:hover {
   cursor: pointer;
 }
 
-.post li:last-child {
+.post div {
   font-size: 10px;
   display: flex;
-  justify-content: center;
-  align-self: center;
+  justify-content: flex-start;
+  align-items: center;
   color: rgba(0, 0, 0, 0.7);
-  height: 14px;
+  height: 17px;
+  width: 275px;
+  margin-left: 2px;
+  overflow: hidden;
 }
 
-.post li:last-child:hover {
+.post div:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .fas.fa-caret-up {
@@ -164,12 +236,16 @@ header {
 }
 
   /* <div className="post-options"> styles */
-.post-options ul {
-  font-size: 10px;
-  margin-left: 43px;
+.post-options {
+  display: flex;
+  margin-left: 39px;
 }
 
-.post-options li ~ li:hover {
+.post-options p, span {
+  font-size: 10px;
+}
+
+.post-options p ~ p:hover {
   cursor: pointer;
   text-decoration: underline;
 }

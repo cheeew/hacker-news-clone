@@ -1,12 +1,14 @@
 import React from "react";
-import PostListing from "./PostListing";
+import Header from "./Header";
 
 class Ask extends React.Component {
   render() {
     return (
-      <div className="ask-wrapper">
-        <p>this is the ask.js component.</p>
-        {/* <PostListing /> */}
+      <div className="wrapper">
+        <Header company="News Clone"/>
+        <div className="canvas">
+          <p>this is the ask.js component.</p>
+        </div>
       </div>
     );
   }

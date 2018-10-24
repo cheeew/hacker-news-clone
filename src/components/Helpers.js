@@ -1,29 +1,23 @@
 import moment from "moment";
 
-function getPostAge() {
-  const timestamp = new Date();
+export default function getPostAge(s) {
+  const ms = Number(s + "000");
+  const timestamp = new Date(ms);
   const date = timestamp.toLocaleDateString().replace(/\D+/g, '-');
   const time = timestamp.toLocaleTimeString();
 
-return moment(`${date} ${time}`, "MM-DD-YYYY hh:mm:ss a").fromNow();
+  return moment(`${date} ${time}`, "MM-DD-YYYY hh:mm:ss a").fromNow();
+} 
+
+export const urls = [
+  "https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty",
+  "https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty", 
+  "https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty",
+  "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty",
+  "https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty", 
+  "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty", 
+];
+
+export function shortUrl(str) {
+  return `(${str.split('.')[1]}.com)`;
 }
-
-export function getPosts() {
-  const newTopBestIds = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty";
-  const askShowJobsIds = "https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty";
-
-  // Pulls top 100 blog posts from HN
-  fetch(newTopBestIds)
-  .then(resp => resp.json())
-  .then(data => {
-    console.log(data);
-    return console.log(data.slice(0, 100).map(id => { 
-      const newTopBestPosts = `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`;
-      fetch(newTopBestPosts)
-        .then(resp => resp.json())
-        .then(data => console.log(data))
-    }));
-  });
-}
-
-export default getPostAge;

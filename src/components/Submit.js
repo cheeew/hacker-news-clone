@@ -1,12 +1,14 @@
 import React from "react";
-import PostListing from "./PostListing";
+import Header from "./Header";
 
 class Submit extends React.Component {
   render() {
     return (
-      <div className="submit-wrapper">
-        <p>this is the submit.js component.</p>
-        {/* <PostListing /> */}
+      <div className="wrapper">
+        <Header company="News Clone"/>
+        <div className="canvas">
+          <p>this is the submit.js component.</p>
+        </div>
       </div>
     );
   }

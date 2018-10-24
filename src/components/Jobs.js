@@ -1,12 +1,14 @@
 import React from "react";
-import PostListing from "./PostListing";
+import Header from "./Header";
 
 class Jobs extends React.Component {
   render() {
     return (
-      <div className="jobs-wrapper">
-        <p>this is the jobs.js component.</p>
-        {/* <PostListing /> */}
+      <div className="wrapper">
+        <Header company="News Clone"/>
+        <div className="canvas">
+          <p>this is the jobs.js component.</p>
+        </div>
       </div>
     );
   }

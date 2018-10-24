@@ -1,30 +1,28 @@
 import React from "react";
-import getPostAge from "./Helpers"
+import getPostAge, { shortUrl } from "./Helpers"
 
 class PostListing extends React.Component {
   render() {
+    const {by, descendants, score, time, title, url} = this.props.details; 
+
     return (
-      <div className="post-wrapper">
+      <li>
         <div className="post">
-          <ul>
-            <li>#.</li>
-            <i className="fas fa-caret-up"></i>
-            <li className="post-title">This is a sample post</li>
-            <li>(examplelink.com)</li>
-          </ul>
+          <p>{this.props.index + 1}.</p>
+          <i className="fas fa-caret-up"></i>
+          <p>{title}</p>
+          <div>({url})</div>
         </div>
         <div className="post-options">
-          <ul>
-            <li className='post-score'>x points by</li>
-            <li className='user'>user</li>
-            <li className="post-age">{getPostAge()}</li>
-            <span>|</span>
-            <li>hide</li>
-            <span>|</span>
-            <li>x comments</li>
-          </ul>
+          <p>{score} points by</p>
+          <p>{by}</p>
+          <p>{getPostAge(time)}</p>
+          <span>|</span>
+          <p>hide</p>
+          <span>|</span>
+          <p>{descendants} comments</p>
         </div>
-      </div>
+      </li>
     );
   }
 }
