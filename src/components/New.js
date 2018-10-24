@@ -8,25 +8,25 @@ import PostListing from "./PostListing";
 class New extends React.Component {
   state = {
     posts: {
-      new: []
+
     }
   };
 
   componentDidMount() {
-    if(!localStorage.getItem('newPosts')) {
+    if(!sessionStorage.getItem('newPosts')) {
       this.pullPosts();
     } else {
-      this.setState({ posts: JSON.parse(localStorage.getItem("newPosts")) });
+      this.setState({ posts: JSON.parse(sessionStorage.getItem("newPosts")) });
     }
 
-    this.postsRef = base.syncState("posts", {
+    this.postsRef = base.syncState("new/posts", {
       context: this,
       state: "posts"
     });
   }
 
   componentDidUpdate() {
-    localStorage.setItem("newPosts", JSON.stringify(this.state.posts));
+    sessionStorage.setItem("newPosts", JSON.stringify(this.state.posts));
   }
 
   componentWillUnmount() {
@@ -35,8 +35,7 @@ class New extends React.Component {
 
   pullPosts = async () => {
     let posts = { ...this.state.posts };
-    let index = "new";
-    posts[index] = [];
+    posts = [];
     // Get 40 post ids for each category
     const response = await fetch(urls[3]);
     const data = await response.json();      
@@ -45,14 +44,14 @@ class New extends React.Component {
     for (let id of postIds) { 
       const resp2 = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
       const data2 = await resp2.json();
-      posts[index].push(data2);
+      posts.push(data2);
     };
     this.setState({ posts });
     console.log("done");
   }
 
   loading = () => {
-    if(this.state.posts.new) return null;
+    if(this.state.posts.length) return null;
     return (
       <React.Fragment>
         <li>Pulling posts from HackerNews.</li>
@@ -69,7 +68,7 @@ class New extends React.Component {
           <LoadButton pullPosts={this.pullPosts}/>
           <ul className="post-wrapper">
             { this.loading() }
-            {Object.entries(this.state.posts.new).map(post => (
+            {Object.entries(this.state.posts).map(post => (
               <PostListing key={post[1]["id"]} index={Number(post[0])} details={post[1]} state={this.state}/>
             ))}
           </ul>
