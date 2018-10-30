@@ -1,30 +1,31 @@
-import React from "react";
-import base from "../base";
+import React, { Component } from 'react';
+import PostListing from "./PostListing";
 import LoadButton from "./LoadButton";
 import { urls } from "./Helpers";
-import PostListing from "./PostListing";
-class Jobs extends React.Component {
+import base from '../base';
+
+class Home extends Component {
   state = {
     posts: {
 
-    }
+    },
   };
 
   componentDidMount() {
-    if(!sessionStorage.getItem('jobPosts')) {
+    if(!sessionStorage.getItem("topPosts")) {
       this.pullPosts();
     } else {
-      this.setState({ posts: JSON.parse(sessionStorage.getItem("jobPosts")) });
+      this.setState({ posts: JSON.parse(sessionStorage.getItem("topPosts")) });
     }
-
-    this.postsRef = base.syncState("jobs/posts", {
+    
+    this.postsRef = base.syncState("top/posts", {
       context: this,
-      state: "posts"
+      state: 'posts'
     });
   }
 
   componentDidUpdate() {
-    sessionStorage.setItem("jobPosts", JSON.stringify(this.state.posts));
+    sessionStorage.setItem('topPosts', JSON.stringify(this.state.posts));
   }
 
   componentWillUnmount() {
@@ -35,7 +36,7 @@ class Jobs extends React.Component {
     let posts = { ...this.state.posts };
     posts = [];
     // Get 40 post ids for each category
-    const response = await fetch(urls[2]);
+    const response = await fetch(urls[5]);
     const data = await response.json();      
     let postIds = data.slice(0, 20);
     // Get 40 post details for each category
@@ -73,4 +74,4 @@ class Jobs extends React.Component {
   }
 }
 
-export default Jobs;
+export default Home;

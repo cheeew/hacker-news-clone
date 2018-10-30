@@ -6,7 +6,7 @@ const Header = props =>  (
   <div className="navigation">
     <div className="news-links">
       <ul className="top-nav">
-        <li className="logo" />
+        <li className="logo" to='/' />
         <li>
           <NavLink className="link" exact to ='/'>{props.company}</NavLink>
         </li>

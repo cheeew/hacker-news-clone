@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./Header";
 import base from "../base";
 import LoadButton from "./LoadButton";
 import { urls } from "./Helpers";
@@ -62,9 +61,7 @@ class New extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <Header company="News Clone"/>
-        <div className="canvas">
+      <div className="main">
           <LoadButton pullPosts={this.pullPosts}/>
           <ul className="post-wrapper">
             { this.loading() }
@@ -73,7 +70,6 @@ class New extends React.Component {
             ))}
           </ul>
         </div>
-      </div>
     );
   }
 }

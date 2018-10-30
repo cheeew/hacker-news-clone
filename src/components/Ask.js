@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./Header";
 import base from "../base";
 import LoadButton from "./LoadButton";
 import { urls } from "./Helpers";
@@ -62,17 +61,14 @@ class Ask extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <Header company="News Clone"/>
-        <div className="canvas">
-          <LoadButton pullPosts={this.pullPosts}/>
-          <ul className="post-wrapper">
-            { this.loading() }
-            {Object.entries(this.state.posts).map(post => (
-              <PostListing key={post[1]["id"]} index={Number(post[0])} details={post[1]} state={this.state}/>
-            ))}
-          </ul>
-        </div>
+      <div className="main">
+        <LoadButton pullPosts={this.pullPosts}/>
+        <ul className="post-wrapper">
+          { this.loading() }
+          {Object.entries(this.state.posts).map(post => (
+            <PostListing key={post[1]["id"]} index={Number(post[0])} details={post[1]} state={this.state}/>
+          ))}
+        </ul>
       </div>
     );
   }

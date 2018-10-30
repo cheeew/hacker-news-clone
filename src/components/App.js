@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Home from "./Home";
+import Ask from "./Ask";
+import Comments from "./Comments";
+import Jobs from "./Jobs";
 import Header from "./Header";
-import PostListing from "./PostListing";
-import LoadButton from "./LoadButton"
+import Login from "./Login";
+import New from "./New";
+import Show from "./Show";
+import Submit from "./Submit";
+import Threads from "./Threads";
 import { urls } from "./Helpers";
 import base from '../base';
-class App extends Component {
-  state = {
-    posts: {
 
-    },
-  };
+class App extends React.Component {
 
   componentDidMount() {
     if(!sessionStorage.getItem("topPosts")) {
@@ -61,17 +65,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <Header company="News Clone"/>
-        <div className="canvas">
-          <LoadButton pullPosts={this.pullPosts}/>
-          <ul className="post-wrapper">
-            { this.loading() }
-            {Object.entries(this.state.posts).map(post => (
-              <PostListing key={post[1]["id"]} index={Number(post[0])} details={post[1]} state={this.state}/>
-            ))}
-          </ul>
-        </div>
+      <div className="canvas">
+        <Header company="News Clone" />
+        <Switch>
+          <Route exact path='/' component={Home} testing="test" />
+          <Route exact path='/ask' component={Ask} />
+          <Route exact path='/comments' component={Comments} />
+          <Route exact path='/jobs' component={Jobs} />
+          <Route exact path='/new' component={New} />
+          <Route exact path='/show' component={Show} />
+          <Route exact path='/submit' component={Submit} />
+          <Route exact path='/threads' component={Threads} />
+          <Route exact path='/login' component={Login} />
+        </Switch>
       </div>
     );
   }

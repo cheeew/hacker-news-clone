@@ -1,5 +1,5 @@
 import React from "react";
-import getPostAge, { shortUrl } from "./Helpers"
+import getPostAge from "./Helpers";
 
 class PostListing extends React.Component {
   render() {

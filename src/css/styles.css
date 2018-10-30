@@ -26,7 +26,6 @@ header {
   background-color: #FF6600;
   width: 83vw;
   height: 24px;
-  margin-top: 8px;
 }
 
 .navigation ul {
@@ -103,17 +102,24 @@ header {
 /* Canvas Component Styles */
 .canvas {
   background-color: #F6F6EF;
-  height: 100vh;
+  height: 100%;
   max-width: 100%;
-  padding: 10px 0 10px 10px;
+  margin-top: 10px;
+  padding-bottom: 25px;
   display: flex;
-  padding-bottom: 50px;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .canvas p {
   margin: 0;
   font-size: 14px;
   padding-bottom: 8px; 
+}
+
+.main {
+  display: flex;
+  padding-top: 10px;
 }
   /* Button styles */
 .button-container {
@@ -185,6 +191,7 @@ header {
 
 .post-wrapper li {
   margin-bottom: 8px;
+  margin-left: 8px;
 }
 
 .post-options {
