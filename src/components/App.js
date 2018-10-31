@@ -12,7 +12,7 @@ import Show from "./Show";
 import Submit from "./Submit";
 import Threads from "./Threads";
 import { urls } from "./Helpers";
-import base from '../base';
+// import base from '../base';
 
 class App extends React.Component {
   state = {

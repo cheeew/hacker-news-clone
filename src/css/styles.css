@@ -261,3 +261,16 @@ header {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.main.post-thread {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-thread ul {
+  padding: 0 0;
+  margin: 0 0;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+}
