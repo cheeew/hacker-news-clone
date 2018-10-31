@@ -8,41 +8,94 @@ const Header = props =>  (
       <ul className="top-nav">
         <li className="logo" to='/' />
         <li>
-          <NavLink className="link" exact to ='/'>{props.company}</NavLink>
+          <NavLink 
+            className="link" 
+            exact 
+            to ='/'>
+            {props.company}
+          </NavLink>
         </li>
         <li>
-          <NavLink className="link" activeClassName="active-link" exact to="/new">new</NavLink>
+          <NavLink 
+            className="link" 
+            activeClassName="active-link" 
+            exact 
+            to="/new">
+            new
+          </NavLink>
         </li>
         <span>|</span>
         <li>
-          <NavLink className="link" activeClassName="active-link" exact to="/threads">threads</NavLink>
+          <NavLink 
+            className="link" 
+            activeClassName="active-link" 
+            exact 
+            to="/threads">
+            threads
+          </NavLink>
         </li> 
         <span>|</span>
         <li>
-          <NavLink className="link" activeClassName="active-link" exact to="/comments">comments</NavLink>
+          <NavLink 
+            className="link" 
+            activeClassName="active-link" 
+            exact 
+            to="/comments">
+            comments
+          </NavLink>
         </li> 
         <span>|</span>
         <li>
-          <NavLink className="link" activeClassName="active-link" exact to="/show">show</NavLink>
+          <NavLink 
+            className="link" 
+            activeClassName="active-link" 
+            exact 
+            to="/show">
+            show
+          </NavLink>
         </li> 
         <span>|</span>
         <li>
-          <NavLink className="link" activeClassName="active-link" exact to="/ask">ask</NavLink>
+          <NavLink 
+            className="link" 
+            activeClassName="active-link" 
+            exact 
+            to="/ask">
+            ask
+          </NavLink>
         </li> 
         <span>|</span>
         <li>
-          <NavLink className="link" activeClassName="active-link" exact to="/jobs">jobs</NavLink>
+          <NavLink 
+            className="link" 
+            activeClassName="active-link" 
+            exact 
+            to="/jobs">
+            jobs
+          </NavLink>
         </li> 
         <span>|</span>
         <li>
-          <NavLink className="link" activeClassName="active-link" exact to="/submit">submit</NavLink>
+          <NavLink 
+            className="link" 
+            activeClassName="active-link" 
+            exact 
+            to="/submit">
+            submit
+          </NavLink>
         </li> 
       </ul>
     </div>
     <div className="user-portal">
       <ul className="login">
         <li>
-          <NavLink className="link" activeClassName="active-link" exact to="/login">login</NavLink>
+          <NavLink 
+            className="link" 
+            activeClassName="active-link" 
+            exact 
+            to="/login">
+            login
+          </NavLink>
         </li>
       </ul>
     </div>

@@ -9,14 +9,14 @@ export default function getPostAge(s) {
   return moment(`${date} ${time}`, "MM-DD-YYYY hh:mm:ss a").fromNow();
 } 
 
-export const urls = [
-  "https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty",
-  "https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty", 
-  "https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty",
-  "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty",
-  "https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty", 
-  "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty", 
-];
+export const urls = {
+  ask: "https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty",
+  best: "https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty", 
+  jobs: "https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty",
+  new: "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty",
+  show: "https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty", 
+  top: "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty", 
+};
 
 export function shortUrl(str) {
   return `(${str.split('.')[1]}.com)`;

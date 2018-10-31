@@ -1,7 +1,15 @@
 import React from "react";
+import { Link} from "react-router-dom";
 import getPostAge from "./Helpers";
 
 class PostListing extends React.Component {
+
+  onClickHandler = (id) => {
+    let thread = { ...this.props.state.thread };
+    thread = id;
+    this.setState({ thread });
+  }
+
   render() {
     const {by, descendants, score, time, title, url} = this.props.details; 
 
@@ -20,7 +28,11 @@ class PostListing extends React.Component {
           <span>|</span>
           <p>hide</p>
           <span>|</span>
-          <p>{descendants} comments</p>
+          <Link details={this.props.details} to={{pathname: `/item/${this.props.id}`}}>
+            <p onClick={() => this.onClickHandler(this.props.id)}>
+              {descendants} comments
+            </p>
+          </Link>
         </div>
       </li>
     );
