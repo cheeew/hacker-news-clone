@@ -5,6 +5,7 @@
   "dependencies": {
     "ajv": "^6.5.4",
     "firebase": "^5.5.5",
+    "he": "^1.2.0",
     "moment": "^2.22.2",
     "re-base": "^4.0.0",
     "react": "^16.5.2",

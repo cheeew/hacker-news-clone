@@ -11,10 +11,9 @@ import PostThread from "./PostThread";
 import Show from "./Show";
 import Submit from "./Submit";
 import Threads from "./Threads";
-import { urls } from "./Helpers";
+import { urls, fetchItems } from "./Helpers";
 // import base from '../base';
-
-class App extends React.Component {
+ class App extends React.Component {
   state = {
     posts: {
       ask: [],
@@ -25,22 +24,31 @@ class App extends React.Component {
       threads: [],
       top: [],
     },
-    thread: {
-
+    currentThread: {
+      comments: [],
+      details: [],
+      id: '',
     },
   };
   
   prepStorage = (category) => {
     const storedPosts = JSON.parse(sessionStorage.getItem("posts"));
-    
-    if(!storedPosts) {
+    const { posts } = this.state;
+    // Pull posts if category posts don't exist, else pull from session storage
+    if(!storedPosts || posts[category].length < 1) {
       this.pullPosts(category);      
-    } 
-    else if (this.state.posts[category].length < 1) {
-      this.pullPosts(category);
-    }
-    else {
+    } else {
       this.setState({ posts : storedPosts });
+    }
+    
+    const {comments} = this.state.currentThread;
+    let currentThread = {...this.state.currentThread};
+    // Reset "Current Thread" state object
+    if(comments.length > 0) { 
+      currentThread.comments = [];
+      currentThread.details = {};
+      currentThread.id = "";
+      this.setState({ currentThread });
     }
     
     // this.postsRef = base.syncState(`posts/${category}`, {
@@ -60,27 +68,37 @@ class App extends React.Component {
 
   pullPosts = async (category) => {
     let posts = { ...this.state.posts };
-    if (posts[category].length > 1) posts[category] = [];
-    // Get 40 post ids for each category
+    // If previous posts exists, clear array for new posts
+    if (posts[category].length > 1) {
+      posts[category] = [];
+    }
+    // Get 20 post ids within the specified category
     const response = await fetch(urls[category]);
     const data = await response.json();      
     let postIds = data.slice(0, 20);
-    // Get 40 post details for each category
-    for (let id of postIds) { 
-      const resp2 = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
-      const data2 = await resp2.json();
-      posts[category].push(data2);
-    };
+    // Get post details for above 20 posts
+    await fetchItems(postIds, posts[category]);
+    // Set state
     this.setState({ posts });
     console.log("done");
   }
 
-  pullComments = (id) => {
-    console.log(id);
+  
+  setId = (postId) => {
+    let currentThread = {...this.state.currentThread};
+    currentThread.id = postId;
+    this.setState({ currentThread });
+  }
+
+  updateCurrentThread = (obj) => {
+    let currentThread = {...this.state.currentThread};
+    currentThread = obj;
+    this.setState({ currentThread });
   }
 
   loading = (category) => {
-    if(this.state.posts[category].length) return null;
+    const { posts } = this.state;
+    if(posts[category].length) return null;
     return (
       <React.Fragment>
         <li>Pulling posts from HackerNews.</li>
@@ -89,19 +107,20 @@ class App extends React.Component {
     );
   }
 
+
   render() {
     return (
       <div className="canvas">
         <Header company="News Clone" />
         <Switch>
-          <Route exact path='/' testing="test">
+          <Route exact path='/'>
             <Home state={this.state} 
             loading={this.loading} 
             pullPosts={this.pullPosts}
             prepStorage={this.prepStorage}
             updateStorage={this.updateStorage}
             unbindStorage={this.unbindStorage} 
-            pullComments={this.pullComments} />
+            setId={this.setId} />
           </Route>
           <Route exact path='/ask'>
             <Ask state={this.state} 
@@ -141,16 +160,19 @@ class App extends React.Component {
             unbindStorage={this.unbindStorage} />
           </Route>
           <Route exact path='/submit'>
-            <Submit state={this.state}/>
+            <Submit state={this.state} />
           </Route>
           <Route exact path='/threads'>
             <Threads state={this.state} 
             loading={this.loading}/>
           </Route>
           <Route exact path='/login'>
-            <Login state={this.state}/>
+            <Login state={this.state} />
           </Route>
-          <Route exact path='/item/:itemId' component={PostThread} />
+          <Route path='/item/:itemId'>
+            <PostThread state={this.state}
+            update={this.updateCurrentThread}/>
+          </Route>
         </Switch>
       </div>
     );

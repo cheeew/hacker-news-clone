@@ -19,5 +19,29 @@ export const urls = {
 };
 
 export function shortUrl(str) {
-  return `(${str.split('.')[1]}.com)`;
+  if(str.includes('www')) {
+    return `(${str.split('.')[1]}.com)`;
+  } else {
+    return `(${str.split('/')[2]})`;
+  }
+}
+
+export function fetchItem(id) {
+  const endpoint = "https://hacker-news.firebaseio.com/v0/item/";
+  const format = ".json?print=pretty";
+  return fetch(endpoint+id+format);
+}
+
+export async function fetchItems(iterable, dataContainer) {
+  for (let childId of iterable) {
+    const resp = await fetchItem(childId);
+    const data = await resp.json();
+    dataContainer.push(data);
+  }
+  
+  // iterable.map(async childId => {
+  //   const resp = await fetchItem(childId);
+  //   const data = await resp.json();
+  //   dataContainer.push(data);
+  // });
 }

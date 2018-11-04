@@ -1,38 +1,36 @@
 import React from 'react';
 import ThreadComments from "./ThreadComments";
+import { fetchItem, fetchItems } from "./Helpers";
 
 class PostThread extends React.Component {
-  state = {
-    threadDetails: {
-
-    },
-    comments: [
-
-
-    ],
-  }
 
   componentDidMount() {
-    let comments = [...this.state.comments];
-    const postId = this.props.match.params.itemId;
-    const url = `https://hacker-news.firebaseio.com/v0/item/${postId}.json?print=pretty`
-    fetch(url)
-      .then(resp => resp.json())
-      .then(data => {
-        let threadDetails = {...this.state.threadDetails};
-        threadDetails = data;
-        this.setState({ threadDetails });
-        return data.kids.map(async thread => {
-          return await fetch(`https://hacker-news.firebaseio.com/v0/item/${thread}.json?print=pretty`)
-            .then(resp => resp.json())
-            .then(data => comments.push(data));
-        });
-      });
-    this.setState({ comments });
+    this.getComments();
+  }
+
+  componentDidUpdate() {
+    // console.log(this.props.state.currentThread.comments);
+  }
+
+  getComments = async () => {
+    let currentThread = {...this.props.state.currentThread};
+    // if previous comments exist, clear array for new comments
+    if (currentThread.comments.length > 0) currentThread.comments = [];
+    // fetch selected post thread
+    const postId = currentThread.id;
+    const response = await fetchItem(postId);
+    const data = await response.json();
+    currentThread.details = data;
+    let comments = data.kids;
+    // get all root comments of selected post
+    await fetchItems(comments, currentThread["comments"]);
+    // upstream function to set state
+    this.props.update(currentThread);
   }
 
   loading = () => {
-    if(this.state.comments.length) return null;
+    const { comments } = this.props.state.currentThread;
+    if(comments.length) return null;
     return (
       <React.Fragment>
         <li>Pulling comments from HackerNews.</li>
@@ -42,15 +40,15 @@ class PostThread extends React.Component {
   }
 
   render() {
-    const { title } = this.state.threadDetails;
+    const { details, comments } = this.props.state.currentThread;
     return (
       <div className="main post-thread">
-        <p>{title}</p>
+        <p><a href={details.url} target={"_blank"}>{details.title}</a></p>
         <div className="comment-container">
           <ul>
             { this.loading() }
-            {this.state.comments.map(comment => (
-              <ThreadComments key={comment["id"]} comment={comment} />
+            {comments.map(comment => (
+              <ThreadComments key={comment.id} comment={comment} state={this.props.state}/>
             ))}
           </ul>
         </div>
