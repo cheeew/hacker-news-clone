@@ -13,6 +13,7 @@ export const urls = {
   ask: "https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty",
   best: "https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty", 
   jobs: "https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty",
+  maxItem: "https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty",
   new: "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty",
   show: "https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty", 
   top: "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty", 

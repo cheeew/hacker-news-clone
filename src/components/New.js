@@ -24,7 +24,10 @@ class New extends React.Component {
             {Object.entries(this.props.state.posts.new).map(post => (
               <PostListing key={post[1]["id"]} 
               index={Number(post[0])} 
-              details={post[1]} />
+              details={post[1]}
+              id={post[1]["id"]}
+              state={this.props.state}
+              setId={this.props.setId} />
             ))}
           </ul>
         </div>

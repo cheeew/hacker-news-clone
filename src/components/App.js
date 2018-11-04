@@ -9,8 +9,6 @@ import Login from "./Login";
 import New from "./New";
 import PostThread from "./PostThread";
 import Show from "./Show";
-import Submit from "./Submit";
-import Threads from "./Threads";
 import { urls, fetchItems } from "./Helpers";
 // import base from '../base';
  class App extends React.Component {
@@ -96,6 +94,12 @@ import { urls, fetchItems } from "./Helpers";
     this.setState({ currentThread });
   }
 
+  updateComments = (obj) => {
+    let comments = {...this.state.posts.comments};
+    comments = obj;
+    this.setState({ comments });
+  }
+
   loading = (category) => {
     const { posts } = this.state;
     if(posts[category].length) return null;
@@ -128,12 +132,14 @@ import { urls, fetchItems } from "./Helpers";
             pullPosts={this.pullPosts}
             prepStorage={this.prepStorage}
             updateStorage={this.updateStorage}
-            unbindStorage={this.unbindStorage} />
+            unbindStorage={this.unbindStorage}
+            setId={this.setId} />
           </Route>
           <Route exact path='/comments'>
             <Comments state={this.state} 
             loading={this.loading} 
-            pullPosts={this.pullPosts}/>
+            pullPosts={this.pullPosts}
+            updateComments = {this.updateComments}/>
           </Route>
           <Route exact path='/jobs'>
             <Jobs state={this.state} 
@@ -149,7 +155,8 @@ import { urls, fetchItems } from "./Helpers";
             pullPosts={this.pullPosts}
             prepStorage={this.prepStorage}
             updateStorage={this.updateStorage}
-            unbindStorage={this.unbindStorage} />
+            unbindStorage={this.unbindStorage}
+            setId={this.setId} />
           </Route>
           <Route exact path='/show'>
             <Show state={this.state} 
@@ -157,14 +164,8 @@ import { urls, fetchItems } from "./Helpers";
             pullPosts={this.pullPosts}
             prepStorage={this.prepStorage}
             updateStorage={this.updateStorage}
-            unbindStorage={this.unbindStorage} />
-          </Route>
-          <Route exact path='/submit'>
-            <Submit state={this.state} />
-          </Route>
-          <Route exact path='/threads'>
-            <Threads state={this.state} 
-            loading={this.loading}/>
+            unbindStorage={this.unbindStorage} 
+            setId={this.setId} />
           </Route>
           <Route exact path='/login'>
             <Login state={this.state} />

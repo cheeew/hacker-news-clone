@@ -30,16 +30,6 @@ const Header = props =>  (
             className="link" 
             activeClassName="active-link" 
             exact 
-            to="/threads">
-            threads
-          </NavLink>
-        </li> 
-        <span>|</span>
-        <li>
-          <NavLink 
-            className="link" 
-            activeClassName="active-link" 
-            exact 
             to="/comments">
             comments
           </NavLink>
@@ -72,16 +62,6 @@ const Header = props =>  (
             exact 
             to="/jobs">
             jobs
-          </NavLink>
-        </li> 
-        <span>|</span>
-        <li>
-          <NavLink 
-            className="link" 
-            activeClassName="active-link" 
-            exact 
-            to="/submit">
-            submit
           </NavLink>
         </li> 
       </ul>
