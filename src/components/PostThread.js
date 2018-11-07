@@ -1,6 +1,6 @@
 import React from 'react';
 import ThreadComments from "./ThreadComments";
-import { fetchItem, fetchItems } from "./Helpers";
+import getPostAge, { fetchItem, fetchItems, shortUrl } from "./Helpers";
 
 class PostThread extends React.Component {
 
@@ -24,8 +24,20 @@ class PostThread extends React.Component {
     let comments = data.kids;
     // get all root comments of selected post
     await fetchItems(comments, currentThread["comments"]);
+    const childComments = await this.getChildComments();
     // upstream function to set state
     this.props.update(currentThread);
+    this.props.updateChildComments(childComments);
+  }
+
+  getChildComments = async () => {
+    let container = [];
+    const { comments } = this.props.state.currentThread;
+    for (let comment of comments) {
+      const children = comment.kids;
+      if(children) await fetchItems(children, container);
+    }
+    return container;
   }
 
   loading = () => {
@@ -40,15 +52,29 @@ class PostThread extends React.Component {
   }
 
   render() {
-    const { details, comments } = this.props.state.currentThread;
+    const { comments } = this.props.state.currentThread;
+    const { score, time, title, url, by, descendants } = this.props.state.currentThread.details;
     return (
       <div className="main post-thread">
-        <p><a href={details.url} target={"_blank"}>{details.title}</a></p>
+        <div>
+          <div className="post-title">
+            <p><a href={url} target={"_blank"}>{title}</a></p>
+            <p>{url ? shortUrl(url) : url}</p>
+          </div>
+          <div className="post-stats">
+            <p>{score ? `${score} points by` : null}</p>
+            <p>{by ? `${by}` : null}</p>
+            <p>{time ? `${getPostAge(time)} |` : null}</p>
+            <p>{descendants ? `${descendants} comments` : null}</p>
+          </div>
+        </div>
         <div className="comment-container">
           <ul>
             { this.loading() }
             {comments.map(comment => (
-              <ThreadComments key={comment.id} comment={comment} state={this.props.state}/>
+              <ThreadComments key={comment.id} 
+              comment={comment} 
+              state={this.props.state} />
             ))}
           </ul>
         </div>

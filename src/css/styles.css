@@ -240,11 +240,6 @@ header {
   overflow: hidden;
 }
 
-.post div:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .fas.fa-caret-up {
   display: flex;
   justify-content: center;
@@ -296,9 +291,50 @@ header {
   color: rgba(0, 0, 0, 0.6);
 }
 
+.post-thread .post-title {
+  display: flex;
+  align-items: center;
+}
+
+.post-thread .post-title p:last-child {
+  margin: 0 0 0 4px;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 0 0 6px;
+}
+
+.post-thread .post-stats {
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  margin: -5px 0 10px 16px; 
+}
+
+.post-stats p {
+  font-size: 11px;
+  margin: 0 0;
+  padding: 0 0;
+}
+
+.post-stats p ~ p {
+  margin-left: 4px; 
+}
+
+.post-stats p:nth-child(2) {
+  font-weight: 700;
+}
+
+.post-stats p:nth-child(2):hover {
+  cursor: pointer;
+  text-decoration: underline; 
+}
+
 .comment-container ul li {
   margin: 10px 10px 20px 30px;
   font-size: 12px;
+}
+
+.user {
+  font-weight: 700;
 }
 
 .comment-container .comment {
@@ -307,6 +343,36 @@ header {
 
 .comment-container .comment-time {
   color: rgba(0, 0, 0, 0.6);
-  font-size: 12px;
   margin-left: 0;
+}
+
+.comment-time span {
+  font-size: 12px;
+}
+
+.comment-time span:first-child {
+  font-weight: 700;
+}
+
+.comment-time span:first-child:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.child-comment-container li div:first-child {
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 8px;
+}
+
+.child-comment-container li div span {
+  font-size: 12px;
+}
+
+.child-comment-container li div span:first-child:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.child-comment-container li div:last-child {
+  margin-left: 15px;
 }

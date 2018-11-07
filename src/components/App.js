@@ -21,9 +21,11 @@ import { urls, fetchItems } from "./Helpers";
       show: [],
       threads: [],
       top: [],
+      hidden: []
     },
     currentThread: {
       comments: [],
+      childComments: [],
       details: [],
       id: '',
     },
@@ -43,6 +45,7 @@ import { urls, fetchItems } from "./Helpers";
     let currentThread = {...this.state.currentThread};
     // Reset "Current Thread" state object
     if(comments.length > 0) { 
+      currentThread.childComments = [];
       currentThread.comments = [];
       currentThread.details = {};
       currentThread.id = "";
@@ -98,6 +101,12 @@ import { urls, fetchItems } from "./Helpers";
     let comments = {...this.state.posts.comments};
     comments = obj;
     this.setState({ comments });
+  }
+
+  updateChildComments = (obj) => {
+    let currentThread = {...this.state.currentThread};
+    currentThread.childComments = obj;
+    this.setState({ currentThread });
   }
 
   loading = (category) => {
@@ -172,7 +181,8 @@ import { urls, fetchItems } from "./Helpers";
           </Route>
           <Route path='/item/:itemId'>
             <PostThread state={this.state}
-            update={this.updateCurrentThread}/>
+            update={this.updateCurrentThread}
+            updateChildComments={this.updateChildComments}/>
           </Route>
         </Switch>
       </div>

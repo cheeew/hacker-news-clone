@@ -1,5 +1,5 @@
 import React from "react";
-import { urls, fetchItems } from "./Helpers";
+// import { urls, fetchItems } from "./Helpers";
 
 class Comments extends React.Component {
   componentDidMount() {
