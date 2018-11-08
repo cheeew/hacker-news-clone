@@ -240,24 +240,10 @@ header {
   overflow: hidden;
 }
 
-.fas.fa-caret-up {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20px;
-  width: 20px;
-  font-size: 20px;
-  color: rgb(151, 151, 151);
-}
-
-.fas.fa-caret-up:hover {
-  cursor: pointer;
-}
-
   /* <div className="post-options"> styles */
 .post-options {
   display: flex;
-  margin-left: 39px;
+  margin-left: 19px;
 }
 
 .post-options p, span {
@@ -282,18 +268,16 @@ header {
   list-style: none;
 }
 
-.post-thread p {
-  margin-left: 15px;
-}
-
-.post-thread p a {
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.6);
-}
-
 .post-thread .post-title {
   display: flex;
   align-items: center;
+  margin: 5px 0 0 25px;
+}
+
+.post-thread .post-title a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 
 .post-thread .post-title p:last-child {
@@ -306,7 +290,7 @@ header {
 .post-thread .post-stats {
   color: rgba(0, 0, 0, 0.6);
   display: flex;
-  margin: -5px 0 10px 16px; 
+  margin: -6px 0 0 25px; 
 }
 
 .post-stats p {
@@ -328,51 +312,83 @@ header {
   text-decoration: underline; 
 }
 
-.comment-container ul li {
-  margin: 10px 10px 20px 30px;
+.comment-thread li {
+  padding: 0 25px;
+  box-sizing: border-box;
   font-size: 12px;
+}
+
+.comment-thread li:first-child {
+  margin-top: 15px;
+}
+
+.comment-thread li ~ li {
+  margin: 25px 0;
+}
+
+.head-comment > *, 
+.head-comment > p,
+.head-comment > * > * { 
+  font-size: 12px;
+  color:rgba(0, 0, 0, 0.9);
+  padding: 0 0;
+  margin: 10px 0 10px;
 }
 
 .user {
   font-weight: 700;
 }
 
-.comment-container .comment {
-  font-size: 12px;
-}
-
-.comment-container .comment-time {
+.comment-heading {
   color: rgba(0, 0, 0, 0.6);
-  margin-left: 0;
+  margin: 0 0 10px;
 }
 
-.comment-time span {
+.comment-heading span {
   font-size: 12px;
 }
 
-.comment-time span:first-child {
+.comment-heading span:first-child {
   font-weight: 700;
 }
 
-.comment-time span:first-child:hover {
+.comment-heading span:first-child:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.child-comment-container li div:first-child {
+.comment-container .child-comment-container {
+  padding: 0 0 0 30px;
+  margin: 0 0;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.comment-container .child-comment-container 
+.child-comment {
+  margin: 0 0;
+  padding: 15px 0 0;
+}
+
+.child-heading {
   color: rgba(0, 0, 0, 0.6);
   margin-bottom: 8px;
 }
 
-.child-comment-container li div span {
+.child-heading span {
   font-size: 12px;
 }
 
-.child-comment-container li div span:first-child:hover {
+.child-heading .user:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.child-comment-container li div:last-child {
-  margin-left: 15px;
+.child-comment .reply > *,
+.child-comment .reply > p,
+.child-comment .reply > * > * {
+  font-size: 12px;
+  color:rgba(0, 0, 0, 0.9);
+  padding: 0 0;
+  margin: 10px 0 10px;
 }

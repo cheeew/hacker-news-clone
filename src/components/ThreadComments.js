@@ -1,15 +1,20 @@
 import React from "react";
 import getPostAge from "./Helpers";
 import ChildComment from "./ChildComment";
-const he = require('he');
+
 class ThreadComments extends React.Component {  
   render() {
     const { text, by, time, kids, id } = this.props.comment;
     const { childComments } = this.props.state.currentThread;
+
+    const createMarkup = () => {
+      return {__html: text};
+    }
+    
     const nestComments = () => {
       return (
         <ul className="child-comment-container">
-          {childComments.filter(comment => comment['parent'] === id)
+          {childComments.filter(comment => comment['parent'] === id && !comment['deleted'])
             .map(comment => {
               return (
                 <ChildComment key={comment['id']} 
@@ -23,21 +28,15 @@ class ThreadComments extends React.Component {
     
     return (
       <li>
-        <div>
-          <p className="comment-time">
-            <span>
-              {by}
-            </span>
-            <span>
-              {` ${getPostAge(time)}`}
-            </span>
-          </p>
+        <div className="comment-heading">
+          <span>
+            {by}
+          </span>
+          <span>
+            {` ${getPostAge(time)}`}
+          </span>
         </div>
-        <div>
-          <p className="comment">
-            {text ? he.decode(text) : text}
-          </p>
-        </div>
+        <div className="head-comment" dangerouslySetInnerHTML={createMarkup()} />
         { kids ? nestComments() : null }
       </li>
     );

@@ -85,9 +85,10 @@ import { urls, fetchItems } from "./Helpers";
   }
 
   
-  setId = (postId) => {
+  setId = (postId, url) => {
     let currentThread = {...this.state.currentThread};
     currentThread.id = postId;
+    currentThread.details.url = url;
     this.setState({ currentThread });
   }
 

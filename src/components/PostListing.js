@@ -10,7 +10,6 @@ class PostListing extends React.Component {
       <li>
         <div className="post">
           <p>{this.props.index + 1}.</p>
-          <i className="fas fa-caret-up"></i>
           <p>
             <a href={url} target={"_blank"}>
               {title}
@@ -27,7 +26,7 @@ class PostListing extends React.Component {
           <span>|</span>
           <p>
             <Link 
-            onClick={() => this.props.setId(this.props.id)} 
+            onClick={() => this.props.setId(this.props.id, url)} 
             exact="true" 
             to={`/item/${this.props.id}`}>
               {descendants} comments

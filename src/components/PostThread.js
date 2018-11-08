@@ -59,7 +59,7 @@ class PostThread extends React.Component {
         <div>
           <div className="post-title">
             <p><a href={url} target={"_blank"}>{title}</a></p>
-            <p>{url ? shortUrl(url) : url}</p>
+            <p>{url & title ? shortUrl(url) : null}</p>
           </div>
           <div className="post-stats">
             <p>{score ? `${score} points by` : null}</p>
@@ -69,9 +69,9 @@ class PostThread extends React.Component {
           </div>
         </div>
         <div className="comment-container">
-          <ul>
+          <ul className="comment-thread">
             { this.loading() }
-            {comments.map(comment => (
+            {comments.filter(c => !c['deleted']).map(comment => (
               <ThreadComments key={comment.id} 
               comment={comment} 
               state={this.props.state} />

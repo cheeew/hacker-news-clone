@@ -1,19 +1,19 @@
 import React from "react";
 import getPostAge from "./Helpers";
-const he = require('he');
-
 class ChildComment extends React.Component {
-  render() {
+  render() {  
     const { by, time, text, id } = this.props.details;
+    const createMarkup = () => {
+      return {__html: text};
+    }
+
     return (
-      <li key={id}>
-        <div>
+      <li className="child-comment" key={id}>
+        <div className='child-heading'>
           <span className="user">{by}</span>
           <span>{` ${getPostAge(time)}`}</span>
         </div>
-        <div>
-          {text ? he.decode(text) : text}
-        </div>
+        <div className="reply" dangerouslySetInnerHTML={createMarkup()} />
       </li>
     );
   }

@@ -1,4 +1,5 @@
 import moment from "moment";
+import he from 'he';
 
 export default function getPostAge(s) {
   const ms = Number(s + "000");
@@ -39,10 +40,11 @@ export async function fetchItems(iterable, dataContainer) {
     const data = await resp.json();
     dataContainer.push(data);
   }
-  
-  // iterable.map(async childId => {
-  //   const resp = await fetchItem(childId);
-  //   const data = await resp.json();
-  //   dataContainer.push(data);
-  // });
 }
+
+export function cleanHtml(string) {
+  let editString = string;
+  editString = string.replace(/(<.*?>)/g, '\n');
+  editString = he.decode(editString);
+  return editString;
+  }
