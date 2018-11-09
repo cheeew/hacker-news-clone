@@ -41,7 +41,7 @@ import { urls, fetchItems } from "./Helpers";
       this.setState({ posts : storedPosts });
     }
     
-    const {comments} = this.state.currentThread;
+    const { comments } = this.state.currentThread;
     let currentThread = {...this.state.currentThread};
     // Reset "Current Thread" state object
     if(comments.length > 0) { 
@@ -99,9 +99,9 @@ import { urls, fetchItems } from "./Helpers";
   }
 
   updateComments = (obj) => {
-    let comments = {...this.state.posts.comments};
-    comments = obj;
-    this.setState({ comments });
+    let posts = {...this.state.posts};
+    posts.comments = obj;
+    this.setState({ posts });
   }
 
   updateChildComments = (obj) => {
@@ -149,7 +149,9 @@ import { urls, fetchItems } from "./Helpers";
             <Comments state={this.state} 
             loading={this.loading} 
             pullPosts={this.pullPosts}
-            updateComments = {this.updateComments}/>
+            prepStorage={this.prepStorage}
+            updateComments = {this.updateComments}
+            updateStorage={this.updateStorage} />
           </Route>
           <Route exact path='/jobs'>
             <Jobs state={this.state} 

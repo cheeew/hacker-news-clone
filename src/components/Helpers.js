@@ -1,5 +1,4 @@
 import moment from "moment";
-import he from 'he';
 
 export default function getPostAge(s) {
   const ms = Number(s + "000");
@@ -42,9 +41,24 @@ export async function fetchItems(iterable, dataContainer) {
   }
 }
 
-export function cleanHtml(string) {
-  let editString = string;
-  editString = string.replace(/(<.*?>)/g, '\n');
-  editString = he.decode(editString);
-  return editString;
+export async function getRecentComments() {
+  const resp = await fetch(urls.maxItem);
+  const data = await resp.json();
+  let comments = [];
+  let counter = 0
+
+  while(comments.length < 20) {
+    let id = data - counter;
+    const response = await fetchItem(id);
+    const story = await response.json();
+    
+    if(story.type === "comment") { 
+      comments.push(story);
+      counter++;
+    } else {
+      counter++;
+    }
   }
+
+  return comments;
+}

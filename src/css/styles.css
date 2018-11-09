@@ -326,6 +326,19 @@ header {
   margin: 25px 0;
 }
 
+.post-wrapper.comment-thread li:first-child {
+  margin-top: 0; 
+}
+
+.post-wrapper.comment-thread {
+  list-style: none;
+}
+
+.post-wrapper.comment-thread li ~ li {
+  margin: 12px 0;
+  padding: 0 32px;
+}
+
 .head-comment > *, 
 .head-comment > p,
 .head-comment > * > * { 

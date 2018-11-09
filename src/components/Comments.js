@@ -1,34 +1,65 @@
 import React from "react";
-// import { urls, fetchItems } from "./Helpers";
+import LoadButton from './LoadButton';
+import ThreadComments from "./ThreadComments";
+import { getRecentComments, fetchItem } from "./Helpers";
 
 class Comments extends React.Component {
-  componentDidMount() {
-    // let commentIds = [...this.props.state.posts.comments];
-    // let comments = [...this.props.state.posts.comments];
-    
-    // const pullLatest = async () => {
-    //   const resp = await fetch(urls.maxItem);
-    //   const data = await resp.json();
-    //   await commentIds.push(data);
+  
+  async componentDidMount() {
+    const storedPosts = JSON.parse(sessionStorage.getItem("posts"));
+    const { posts } = this.props.state;
 
-    //   let i = 0;
-    //   while(commentIds.length < 20) {
-    //     if (i === 20) return;
-    //     let newId = commentIds[i] - 1;
-    //     commentIds.push(newId);
-    //     i++;
-    //   }
+    if(!storedPosts || posts["comments"].length < 1) {
+      this.retrieveComments();
+    } else {
+      this.props.prepStorage('comments');
+    }
 
-    //   await fetchItems(commentIds, comments);
-    //   this.props.updateComments(comments);
-    // }
-    // pullLatest();
+    this.getParent();
+
+    const {comments} = this.props.state.currentThread;
+    let currentThread = {...this.props.state.currentThread};
+    // Reset "Current Thread" state object
+    if(comments.length > 0) { 
+      currentThread.childComments = [];
+      currentThread.comments = [];
+      currentThread.details = {};
+      currentThread.id = "";
+      this.setState({ currentThread });
+    }
+  }
+
+  componentWillUpdate() {
+    this.props.updateStorage();
+  }
+
+  getParent = async() => {
+    const resp = await fetchItem(18402931);
+    const data = await resp.json();
+
+    console.log(data);
+  }
+  
+  retrieveComments = async () => {
+    const comments = await getRecentComments();
+    this.props.updateComments(comments);
   }
 
   render() {
+    const { comments } = this.props.state.posts;
+
     return (
       <div className="main">
-        <p>this is the comments.js component.</p>
+        <LoadButton pullPosts={() => this.retrieveComments()} />
+        <ul className="post-wrapper comment-thread">
+        { this.props.loading("comments") }
+          {comments.filter(c => !c['deleted']).map(comment => (
+            <ThreadComments 
+            key={comment.id}
+            comment={comment}
+            state={this.props.state} />
+          ))}
+        </ul>
       </div>
     );
   }
