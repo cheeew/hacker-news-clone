@@ -30,7 +30,7 @@ class User extends React.Component {
   render() {
     const { created, id, karma, showSubmissions, submitted } = this.props.user;
     const stories = submitted 
-    ? submitted.filter(sub => sub.type === "story" && !sub.deleted) 
+    ? submitted.filter(sub => sub && sub.type === "story" && !sub.deleted) 
     : null;
 
     return (
@@ -43,8 +43,8 @@ class User extends React.Component {
           <span className="subs"
           onClick ={() => this.toggleSubs()}>
             {typeof submitted[0] === 'number' 
-            ? "submissions (loading...just one moment)" 
-            : "submissions"}
+            ? `${submitted.length} total submissions (parsing post submissions...just one moment)` 
+            : `${stories.length} stories`}
           </span>
           </p> 
         : null}

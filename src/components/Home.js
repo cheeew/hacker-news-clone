@@ -20,17 +20,22 @@ class Home extends Component {
     return (
       <div className="main">
         <LoadButton pullPosts={() => this.props.pullPosts('top')}/>
-        <ul className="post-wrapper">
-          { this.props.loading('top') }
-          {Object.entries(this.props.state.posts.top).map(post => (
-            <PostListing key={post[1]["id"]} 
-            index={Number(post[0])} 
-            details={post[1]}
-            id={post[1]["id"]}
-            state={this.props.state}
-            />
-          ))}
-        </ul>
+        <div className='post-wrapper container'>
+          <ul className="post-wrapper">
+            { this.props.loading('top') }
+            {Object.entries(this.props.state.posts.top).map(post => (
+              <PostListing key={post[1]["id"]} 
+              index={Number(post[0])} 
+              details={post[1]}
+              id={post[1]["id"]}
+              state={this.props.state}
+              />
+            ))}
+          </ul>
+          <div className='pagination'>
+            <p onClick={() => this.props.paginate('top')}>More</p>
+          </div>
+        </div>
       </div>
     );
   }

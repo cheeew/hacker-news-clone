@@ -1,5 +1,6 @@
 import React from 'react';
 import ThreadComments from "./ThreadComments";
+import Disclaimer from "./Disclaimer";
 import getPostAge, { fetchItem, 
   fetchItems, 
   shortUrl,
@@ -71,7 +72,7 @@ class PostThread extends React.Component {
 
   render() {
     const { comments } = this.props.state.currentThread;
-    const { score, time, title, url, by, descendants } = this.props.state.currentThread.details;
+    const { score, time, title, url, by, descendants, id, type } = this.props.state.currentThread.details;
     return (
       <div className="main post-thread">
         <div>
@@ -89,6 +90,7 @@ class PostThread extends React.Component {
             </p>
           </div>
         </div>
+        {id && type !== "comment" ? <Disclaimer id={id} /> : null}
         <div className="comment-container">
           <ul className="comment-thread">
             { this.loading() }

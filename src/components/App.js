@@ -4,6 +4,7 @@ import Home from "./Home";
 import Ask from "./Ask";
 // import base from "../base";
 import Comments from "./Comments";
+import Footer from "./Footer";
 import Jobs from "./Jobs";
 import Header from "./Header";
 import Login from "./Login";
@@ -12,7 +13,7 @@ import PostThread from "./PostThread";
 import Show from "./Show";
 import { urls, fetchItems } from "./Helpers";
 import User from "./User";
-// import base from '../base';
+
  class App extends React.Component {
   state = {
     posts: {
@@ -27,7 +28,6 @@ import User from "./User";
       comments: [],
       childComments: [],
       details: [],
-      id: '',
     },
     user: {
 
@@ -82,13 +82,28 @@ import User from "./User";
     const response = await fetch(urls[category]);
     const data = await response.json();      
     
-    let postIds = data.slice(0, 20);
+    let postIds = data.slice(0, 30);
 
     // Get post details for above 20 posts
     await fetchItems(postIds, posts[category]);
     // Set state
     this.setState({ posts });
     console.log("done");
+  }
+
+  paginate = async(category) => {
+    // let posts = {...this.state.posts};
+    // const index = this.state[category].length;
+
+    // const response = await fetch(urls[category]);
+    // const data = await response.json();      
+    
+    // let postIds = data.slice(index, index + 30);
+
+    // await fetchItems(postIds, posts[category]);
+    // posts[category] = posts[category].slice(index, index + 30);
+    
+    // this.setState({ posts });
   }
 
   updateCurrentThread = (obj) => {
@@ -144,6 +159,7 @@ import User from "./User";
             prepStorage={this.prepStorage}
             updateStorage={this.updateStorage}
             unbindStorage={this.unbindStorage}
+            paginate={this.paginate}
             />} 
           />
           <Route exact path='/ask' render={() => 
@@ -207,6 +223,7 @@ import User from "./User";
             user={this.state.user}/>} 
           />
         </Switch>
+        <Footer />
       </div>
     );
   }

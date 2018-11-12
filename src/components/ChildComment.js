@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import getPostAge from "./Helpers";
 class ChildComment extends React.Component {
+
   render() {  
     const { by, time, text, id } = this.props.details;
     const createMarkup = () => {
@@ -11,7 +13,7 @@ class ChildComment extends React.Component {
       <li className="child-comment" key={id}>
         <div className='child-heading'>
           <span className="user">
-            {by}
+            <Link exact to={`/user/${by}`}>{by}</Link>
           </span>
           <span>{` ${getPostAge(time)}`}</span>
         </div>
