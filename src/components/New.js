@@ -26,8 +26,7 @@ class New extends React.Component {
               index={Number(post[0])} 
               details={post[1]}
               id={post[1]["id"]}
-              state={this.props.state}
-              setId={this.props.setId} />
+              state={this.props.state}/>
             ))}
           </ul>
         </div>

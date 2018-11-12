@@ -19,17 +19,18 @@ class PostListing extends React.Component {
         </div>
         <div className="post-options">
           <p>{score} points by</p>
-          <p>{by}</p>
+          <p>
+            <Link exact='true' to={`/user/${by}`}>
+            {by}
+            </Link>
+          </p>
           <p>{getPostAge(time)}</p>
           <span>|</span>
           <p>hide</p>
           <span>|</span>
           <p>
-            <Link 
-            onClick={() => this.props.setId(this.props.id, url)} 
-            exact="true" 
-            to={`/item/${this.props.id}`}>
-              {descendants} comments
+            <Link exact="true" to={`/item/${this.props.id}`}>
+              {descendants ? `${descendants} comments` : "discuss"}
             </Link>
           </p>
         </div>

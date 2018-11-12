@@ -1,6 +1,9 @@
 import React from 'react';
 import ThreadComments from "./ThreadComments";
-import getPostAge, { fetchItem, fetchItems, shortUrl } from "./Helpers";
+import getPostAge, { fetchItem, 
+  fetchItems, 
+  shortUrl,
+ } from "./Helpers";
 
 class PostThread extends React.Component {
 
@@ -12,22 +15,33 @@ class PostThread extends React.Component {
     // console.log(this.props.state.currentThread.comments);
   }
 
+  componentWillUnmount() {
+    let currentThread = {...this.props.state.currentThread};
+    currentThread.details = {};
+    currentThread.id = "";
+    this.props.update(currentThread);
+  }
+
   getComments = async () => {
     let currentThread = {...this.props.state.currentThread};
     // if previous comments exist, clear array for new comments
     if (currentThread.comments.length > 0) currentThread.comments = [];
     // fetch selected post thread
-    const postId = currentThread.id;
-    const response = await fetchItem(postId);
+    const { itemId } = this.props.match.params;
+    const response = await fetchItem(itemId);
     const data = await response.json();
     currentThread.details = data;
     let comments = data.kids;
     // get all root comments of selected post
-    await fetchItems(comments, currentThread["comments"]);
-    const childComments = await this.getChildComments();
-    // upstream function to set state
-    this.props.update(currentThread);
-    this.props.updateChildComments(childComments);
+    if (comments) {
+      await fetchItems(comments, currentThread["comments"]);
+      const childComments = await this.getChildComments();
+      this.props.update(currentThread);
+      this.props.updateChildComments(childComments);
+    } else {
+      // upstream function to set state
+      this.props.update(currentThread);
+    }
   }
 
   getChildComments = async () => {
@@ -42,12 +56,16 @@ class PostThread extends React.Component {
 
   loading = () => {
     const { comments } = this.props.state.currentThread;
-    if(comments.length) return null;
+    const { currentThread } = this.props.state;
+    if(comments.length || currentThread.details.descendants === 0) return null;
     return (
-      <React.Fragment>
-        <li>Pulling comments from HackerNews.</li>
-        <li>This should only take a few seconds...</li>
-      </React.Fragment>
+      <li className="load-screen">
+        <span>Pulling comment thread from HackerNews.</span>
+        <span>This should only take a few seconds.</span>
+        <div className="ball-container">
+          <span className="ball" />
+        </div>
+    </li>
     );
   }
 
@@ -59,13 +77,16 @@ class PostThread extends React.Component {
         <div>
           <div className="post-title">
             <p><a href={url} target={"_blank"}>{title}</a></p>
-            <p>{url & title ? shortUrl(url) : null}</p>
+            <p>{url ? shortUrl(url) : null}</p>
           </div>
           <div className="post-stats">
             <p>{score ? `${score} points by` : null}</p>
             <p>{by ? `${by}` : null}</p>
             <p>{time ? `${getPostAge(time)} |` : null}</p>
-            <p>{descendants ? `${descendants} comments` : null}</p>
+            <p>
+            {descendants > 0 ? `${descendants} comments` : null}
+            {descendants < 1 ? `discuss` : null}
+            </p>
           </div>
         </div>
         <div className="comment-container">

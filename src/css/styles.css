@@ -172,6 +172,10 @@ header {
   top: 0;
 }
 
+.button-background:active:before {
+  background-color: rgba(255, 102, 0, 0.80);
+}
+
 .button-background span {
   z-index: 1;
   font-size: 10px;
@@ -327,7 +331,7 @@ header {
 }
 
 .post-wrapper.comment-thread li:first-child {
-  margin-top: 0; 
+  margin: 2px 0 0 8px; 
 }
 
 .post-wrapper.comment-thread {
@@ -335,7 +339,7 @@ header {
 }
 
 .post-wrapper.comment-thread li ~ li {
-  margin: 12px 0;
+  margin: 8px 0;
   padding: 0 32px;
 }
 
@@ -366,6 +370,17 @@ header {
 }
 
 .comment-heading span:first-child:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.comment-heading .parent-title {
+  color: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.comment-heading .parent-title:hover {
   cursor: pointer;
   text-decoration: underline;
 }
@@ -404,4 +419,101 @@ header {
   color:rgba(0, 0, 0, 0.9);
   padding: 0 0;
   margin: 10px 0 10px;
+}
+
+.load-screen {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-20%);
+}
+
+.load-screen span {
+  font-size: 14px;
+}
+
+.load-screen span:first-child {
+  margin-bottom: 15px; 
+}
+
+.load-screen div {
+  margin-top: 25px;
+}
+
+.ball-container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+}
+
+.ball-container::before, .ball-container::after {
+  background-color: grey;
+  border-radius: 100px;
+  width: 12px;
+  height: 12px;
+  content: '';
+  position: absolute;
+}
+
+.ball-container::before {
+  animation: worm 900ms 600ms linear infinite;
+  margin-right: 40px;
+}
+
+.ball {
+  background-color: grey;
+  border-radius: 100px;
+  width: 12px;
+  height: 12px;
+  position: relative;
+  animation: worm 900ms 300ms linear infinite;
+}
+
+.ball-container::after {
+  margin-left: 40px;
+  animation: worm 900ms linear infinite;
+}
+
+@keyframes worm {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-110%);
+    opacity: 0.5
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.main.user {
+  margin-left: 25px;
+  font-weight: 100;
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.main.user .subs {
+  margin-left: 5px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+}
+
+.main.user .subs:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.main.user .post-wrapper {
+  order: 0;
 }

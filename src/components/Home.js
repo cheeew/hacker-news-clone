@@ -28,7 +28,7 @@ class Home extends Component {
             details={post[1]}
             id={post[1]["id"]}
             state={this.props.state}
-            setId={this.props.setId} />
+            />
           ))}
         </ul>
       </div>

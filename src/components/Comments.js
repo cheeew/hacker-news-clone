@@ -1,7 +1,7 @@
 import React from "react";
 import LoadButton from './LoadButton';
 import ThreadComments from "./ThreadComments";
-import { getRecentComments, fetchItem } from "./Helpers";
+import { findStories } from "./Helpers";
 
 class Comments extends React.Component {
   
@@ -14,8 +14,6 @@ class Comments extends React.Component {
     } else {
       this.props.prepStorage('comments');
     }
-
-    this.getParent();
 
     const {comments} = this.props.state.currentThread;
     let currentThread = {...this.props.state.currentThread};
@@ -32,16 +30,12 @@ class Comments extends React.Component {
   componentWillUpdate() {
     this.props.updateStorage();
   }
-
-  getParent = async() => {
-    const resp = await fetchItem(18402931);
-    const data = await resp.json();
-
-    console.log(data);
-  }
   
   retrieveComments = async () => {
-    const comments = await getRecentComments();
+    let comments = [];
+    this.props.updateComments(comments);
+    comments =  await findStories();
+    console.log(comments);
     this.props.updateComments(comments);
   }
 
@@ -57,7 +51,7 @@ class Comments extends React.Component {
             <ThreadComments 
             key={comment.id}
             comment={comment}
-            state={this.props.state} />
+            state={this.props.state}/>
           ))}
         </ul>
       </div>

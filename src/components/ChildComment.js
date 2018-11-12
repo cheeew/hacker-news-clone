@@ -10,7 +10,9 @@ class ChildComment extends React.Component {
     return (
       <li className="child-comment" key={id}>
         <div className='child-heading'>
-          <span className="user">{by}</span>
+          <span className="user">
+            {by}
+          </span>
           <span>{` ${getPostAge(time)}`}</span>
         </div>
         <div className="reply" dangerouslySetInnerHTML={createMarkup()} />

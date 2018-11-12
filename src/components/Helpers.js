@@ -16,7 +16,7 @@ export const urls = {
   maxItem: "https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty",
   new: "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty",
   show: "https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty", 
-  top: "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty", 
+  top: "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
 };
 
 export function shortUrl(str) {
@@ -41,6 +41,13 @@ export async function fetchItems(iterable, dataContainer) {
   }
 }
 
+export async function fetchUser(user) {
+  const endpoint = `https://hacker-news.firebaseio.com/v0/user/${user}.json?print=pretty`
+  const resp = await fetch(endpoint);
+  const userInfo = await resp.json();
+  return userInfo;
+}
+
 export async function getRecentComments() {
   const resp = await fetch(urls.maxItem);
   const data = await resp.json();
@@ -51,7 +58,6 @@ export async function getRecentComments() {
     let id = data - counter;
     const response = await fetchItem(id);
     const story = await response.json();
-    
     if(story.type === "comment") { 
       comments.push(story);
       counter++;
@@ -59,6 +65,26 @@ export async function getRecentComments() {
       counter++;
     }
   }
-
   return comments;
+}
+
+export async function findStories() {
+  const comments = await getRecentComments();
+  let bin = comments;
+  let i = 0; 
+  
+  for (let child of comments) {
+    let resp = await fetchItem(child.parent);
+    let story = await resp.json();
+
+    while(story.type !== "story") {
+      const resp = await fetchItem(story.parent);
+      const data = await resp.json();
+      story = data;
+    }
+    bin[i].parentPost = {id: story.id, title: story.title, url: story.url};
+    i++;
+  }
+  
+  return bin;
 }
