@@ -37,22 +37,22 @@ import User from "./User";
   componentDidUpdate() {
     window.scrollTo(0, 0);
   }
-  
+
   prepStorage = (category) => {
     const storedPosts = JSON.parse(sessionStorage.getItem("posts"));
     const { posts } = this.state;
 
     // Pull posts if category posts don't exist, else pull from session storage
     if(!storedPosts || posts[category].length < 1) {
-      this.pullPosts(category);      
+      this.pullPosts(category);
     } else {
       this.setState({ posts : storedPosts });
     }
-    
+
     const { comments } = this.state.currentThread;
     let currentThread = {...this.state.currentThread};
     // Reset "Current Thread" state object
-    if(comments.length > 0) { 
+    if(comments.length > 0) {
       currentThread.childComments = [];
       currentThread.comments = [];
       currentThread.details = {};
@@ -61,12 +61,12 @@ import User from "./User";
     }
 
   }
-  
+
   updateStorage = () => {
     const { posts } = this.state;
     sessionStorage.setItem( "posts", JSON.stringify(posts));
   }
-  
+
   unbindStorage = () => {
     // base.removeBinding(this.postsRef);
   }
@@ -80,8 +80,8 @@ import User from "./User";
     }
     // Get 20 post ids within the specified category
     const response = await fetch(urls[category]);
-    const data = await response.json();      
-    
+    const data = await response.json();
+
     let postIds = data.slice(0, 30);
 
     // Get post details for above 20 posts
@@ -96,13 +96,13 @@ import User from "./User";
     // const index = this.state[category].length;
 
     // const response = await fetch(urls[category]);
-    // const data = await response.json();      
-    
+    // const data = await response.json();
+
     // let postIds = data.slice(index, index + 30);
 
     // await fetchItems(postIds, posts[category]);
     // posts[category] = posts[category].slice(index, index + 30);
-    
+
     // this.setState({ posts });
   }
 
@@ -136,7 +136,7 @@ import User from "./User";
     return (
       <li className="load-screen">
         { category === "comments"
-        ? <span>Pulling most recent comments from HackerNews.</span> 
+        ? <span>Pulling most recent comments from HackerNews.</span>
         : <span>Pulling latest posts from HackerNews.</span> }
         <span>This should only take a few seconds.</span>
         <div className="ball-container">
@@ -151,8 +151,8 @@ import User from "./User";
       <div className="canvas">
         <Header company="News Clone" />
         <Switch>
-          <Route exact path='/' render={() => 
-            <Home 
+          <Route exact path='/' render={() =>
+            <Home
             state={this.state}
             loading={this.loading}
             pullPosts={this.pullPosts}
@@ -160,67 +160,67 @@ import User from "./User";
             updateStorage={this.updateStorage}
             unbindStorage={this.unbindStorage}
             paginate={this.paginate}
-            />} 
+            />}
           />
-          <Route exact path='/ask' render={() => 
-            <Ask 
-            state={this.state} 
-            loading={this.loading} 
+          <Route exact path='/ask' render={() =>
+            <Ask
+            state={this.state}
+            loading={this.loading}
             pullPosts={this.pullPosts}
             prepStorage={this.prepStorage}
             updateStorage={this.updateStorage}
             unbindStorage={this.unbindStorage} />}
           />
-          <Route exact path='/comments' render={() => 
-            <Comments 
-            state={this.state} 
-            loading={this.loading} 
+          <Route exact path='/comments' render={() =>
+            <Comments
+            state={this.state}
+            loading={this.loading}
             pullPosts={this.pullPosts}
             prepStorage={this.prepStorage}
             updateComments = {this.updateComments}
             updateStorage={this.updateStorage}/>}
           />
-          <Route exact path='/jobs' render={() => 
-            <Jobs 
-            state={this.state} 
-            loading={this.loading} 
+          <Route exact path='/jobs' render={() =>
+            <Jobs
+            state={this.state}
+            loading={this.loading}
             pullPosts={this.pullPosts}
             prepStorage={this.prepStorage}
             updateStorage={this.updateStorage}
             unbindStorage={this.unbindStorage} />}
           />
-          <Route exact path='/new' render={() =>    
-            <New 
-            state={this.state} 
-            loading={this.loading} 
-            pullPosts={this.pullPosts}
-            prepStorage={this.prepStorage}
-            updateStorage={this.updateStorage}
-            unbindStorage={this.unbindStorage}/>} 
-          />
-          <Route exact path='/show' render={() => 
-            <Show 
-            state={this.state} 
-            loading={this.loading} 
+          <Route exact path='/new' render={() =>
+            <New
+            state={this.state}
+            loading={this.loading}
             pullPosts={this.pullPosts}
             prepStorage={this.prepStorage}
             updateStorage={this.updateStorage}
             unbindStorage={this.unbindStorage}/>}
           />
-          <Route exact path='/login' render={() => 
+          <Route exact path='/show' render={() =>
+            <Show
+            state={this.state}
+            loading={this.loading}
+            pullPosts={this.pullPosts}
+            prepStorage={this.prepStorage}
+            updateStorage={this.updateStorage}
+            unbindStorage={this.unbindStorage}/>}
+          />
+          <Route exact path='/login' render={() =>
             <Login state={this.state} />}
           />
           <Route exact path='/item/:itemId' render={(props) =>
-            <PostThread 
+            <PostThread
             {...props}
             state={this.state}
             update={this.updateCurrentThread}
             updateChildComments={this.updateChildComments} />}
           />
-          <Route exact path='/user/:username' render={(props) => 
-            <User {...props} 
+          <Route exact path='/user/:username' render={(props) =>
+            <User {...props}
             updateUser={this.updateUser}
-            user={this.state.user}/>} 
+            user={this.state.user}/>}
           />
         </Switch>
         <Footer />

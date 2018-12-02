@@ -7,15 +7,15 @@ export default function getPostAge(s) {
   const time = timestamp.toLocaleTimeString();
 
   return moment(`${date} ${time}`, "MM-DD-YYYY hh:mm:ss a").fromNow();
-} 
+}
 
 export const urls = {
   ask: "https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty",
-  best: "https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty", 
+  best: "https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty",
   jobs: "https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty",
   maxItem: "https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty",
   new: "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty",
-  show: "https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty", 
+  show: "https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty",
   top: "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
 };
 
@@ -58,7 +58,7 @@ export async function getRecentComments() {
     let id = data - counter;
     const response = await fetchItem(id);
     const story = await response.json();
-    if(story.type === "comment") { 
+    if(story.type === "comment") {
       comments.push(story);
       counter++;
     } else {
@@ -71,8 +71,8 @@ export async function getRecentComments() {
 export async function findStories() {
   const comments = await getRecentComments();
   let bin = comments;
-  let i = 0; 
-  
+  let i = 0;
+
   for (let child of comments) {
     let resp = await fetchItem(child.parent);
     let story = await resp.json();
@@ -85,6 +85,6 @@ export async function findStories() {
     bin[i].parentPost = {id: story.id, title: story.title, url: story.url};
     i++;
   }
-  
+
   return bin;
 }

@@ -22,8 +22,8 @@ class Show extends React.Component {
         <ul className="post-wrapper">
           { this.props.loading('show') }
           {Object.entries(this.props.state.posts.show).map(post => (
-            <PostListing key={post[1]["id"]} 
-            index={Number(post[0])} 
+            <PostListing key={post[1]["id"]}
+            index={Number(post[0])}
             details={post[1]}
             id={post[1]["id"]}
             state={this.props.state}/>

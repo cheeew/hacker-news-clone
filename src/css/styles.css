@@ -24,7 +24,7 @@ header {
 .navigation {
   display: flex;
   justify-content: space-between;
-  background-color: #FF6600;
+  background-color: #ff6600;
   width: 100%;
   height: 24px;
   position: relative;
@@ -103,7 +103,7 @@ header {
 
 /* Canvas Component Styles */
 .canvas {
-  background-color: #F6F6EF;
+  background-color: #f6f6ef;
   height: auto;
   width: 83vw;
   margin-top: 10px;
@@ -115,16 +115,16 @@ header {
 .canvas p {
   margin: 0;
   font-size: 14px;
-  padding-bottom: 8px; 
+  padding-bottom: 8px;
 }
 
 .main {
   display: flex;
   padding-top: 10px;
 }
-  /* Button styles */
+/* Button styles */
 .button-container {
-  display: flex; 
+  display: flex;
   justify-content: flex-end;
   flex: 0;
   height: 30px;
@@ -132,8 +132,8 @@ header {
 
 .button-background {
   border-radius: 3px;
-  border: 1px solid #FF6600; 
-  color: #FF6600; 
+  border: 1px solid #ff6600;
+  color: #ff6600;
   transition: color 300ms ease;
   position: relative;
   box-sizing: border-box;
@@ -157,7 +157,7 @@ header {
 .button-background:before {
   content: "";
   position: absolute;
-  background: #FF6600;
+  background: #ff6600;
   bottom: 0;
   left: 0;
   right: 0;
@@ -172,7 +172,7 @@ header {
 }
 
 .button-background:active:before {
-  background-color: rgba(255, 102, 0, 0.80);
+  background-color: rgba(255, 102, 0, 0.8);
 }
 
 .button-background span {
@@ -223,16 +223,18 @@ header {
   color: rgb(102, 102, 102);
 }
 
-.post p, .post-options span, 
+.post p,
+.post-options span,
 .post-options p {
   margin: 0 2px;
 }
 
-.post p, .post-options p {
+.post p,
+.post-options p {
   padding: 0 0;
 }
 
-  /* <div className="post"> styles */
+/* <div className="post"> styles */
 .post {
   display: flex;
 }
@@ -258,13 +260,14 @@ header {
   overflow: hidden;
 }
 
-  /* <div className="post-options"> styles */
+/* <div className="post-options"> styles */
 .post-options {
   display: flex;
   margin-left: 19px;
 }
 
-.post-options p, span {
+.post-options p,
+span {
   font-size: 10px;
 }
 
@@ -308,7 +311,7 @@ header {
 .post-thread .post-stats {
   color: rgba(0, 0, 0, 0.6);
   display: flex;
-  margin: -6px 0 0 25px; 
+  margin: -6px 0 0 25px;
 }
 
 .post-stats p {
@@ -318,7 +321,7 @@ header {
 }
 
 .post-stats p ~ p {
-  margin-left: 4px; 
+  margin-left: 4px;
 }
 
 .post-stats p:nth-child(2) {
@@ -327,7 +330,7 @@ header {
 
 .post-stats p:nth-child(2):hover {
   cursor: pointer;
-  text-decoration: underline; 
+  text-decoration: underline;
 }
 
 .disclaimer {
@@ -365,7 +368,7 @@ header {
 }
 
 .post-wrapper.comment-thread li:first-child {
-  margin: 2px 0 0 8px; 
+  margin: 2px 0 0 8px;
 }
 
 .post-wrapper.comment-thread {
@@ -377,11 +380,11 @@ header {
   padding: 0 32px;
 }
 
-.head-comment > *, 
+.head-comment > *,
 .head-comment > p,
-.head-comment > * > * { 
+.head-comment > * > * {
   font-size: 12px;
-  color:rgba(0, 0, 0, 0.9);
+  color: rgba(0, 0, 0, 0.9);
   padding: 0 0;
   margin: 10px 0 10px;
 }
@@ -407,7 +410,7 @@ header {
 .comment-heading span a:hover {
   text-decoration: underline;
   cursor: hover;
-} 
+}
 
 .comment-heading span:first-child {
   font-weight: 700;
@@ -436,8 +439,7 @@ header {
   box-sizing: border-box;
 }
 
-.comment-container .child-comment-container 
-.child-comment {
+.comment-container .child-comment-container .child-comment {
   margin: 0 0;
   padding: 15px 0 0;
 }
@@ -470,7 +472,7 @@ header {
 .child-comment .reply > p,
 .child-comment .reply > * > * {
   font-size: 12px;
-  color:rgba(0, 0, 0, 0.9);
+  color: rgba(0, 0, 0, 0.9);
   padding: 0 0;
   margin: 10px 0 10px;
 }
@@ -490,7 +492,7 @@ header {
 }
 
 .load-screen span:first-child {
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
 }
 
 .load-screen div {
@@ -498,25 +500,26 @@ header {
 }
 
 .ball-container {
-  width: 100%;
+  width: 100px;
   height: 100px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   padding-top: 25px;
+  position: relative;
 }
 
-.ball-container::before, .ball-container::after {
+.ball-container::before,
+.ball-container::after {
   background-color: grey;
   border-radius: 100px;
   width: 12px;
   height: 12px;
-  content: '';
-  position: absolute;
+  content: "";
+  position: relative;
 }
 
 .ball-container::before {
   animation: worm 900ms 600ms linear infinite;
-  margin-right: 40px;
 }
 
 .ball {
@@ -529,7 +532,7 @@ header {
 }
 
 .ball-container::after {
-  margin-left: 40px;
+  /* margin-left: 40px; */
   animation: worm 900ms linear infinite;
 }
 
@@ -540,7 +543,7 @@ header {
   }
   50% {
     transform: translateY(-110%);
-    opacity: 0.5
+    opacity: 0.5;
   }
   100% {
     transform: translateY(0%);
@@ -572,7 +575,6 @@ header {
   order: 0;
 }
 
-
 /* Footer Styles */
 .footer {
   display: flex;
@@ -581,16 +583,16 @@ header {
   height: 100%;
   justify-content: center;
   align-items: center;
-  padding: 15px 0 15px; 
+  padding: 15px 0 15px;
 }
 
 .footer::before {
-  background-color: #FF6600;
+  background-color: #ff6600;
   height: 2px;
   width: 100%;
   transform: translateY(-15px);
   position: relative;
-  content: '';
+  content: "";
 }
 
 .footer p {

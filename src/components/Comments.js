@@ -4,7 +4,7 @@ import ThreadComments from "./ThreadComments";
 import { findStories } from "./Helpers";
 
 class Comments extends React.Component {
-  
+
   async componentDidMount() {
     const storedPosts = JSON.parse(sessionStorage.getItem("posts"));
     const { posts } = this.props.state;
@@ -18,7 +18,7 @@ class Comments extends React.Component {
     const {comments} = this.props.state.currentThread;
     let currentThread = {...this.props.state.currentThread};
     // Reset "Current Thread" state object
-    if(comments.length > 0) { 
+    if(comments.length > 0) {
       currentThread.childComments = [];
       currentThread.comments = [];
       currentThread.details = {};
@@ -30,7 +30,7 @@ class Comments extends React.Component {
   componentWillUpdate() {
     this.props.updateStorage();
   }
-  
+
   retrieveComments = async () => {
     let comments = [];
     this.props.updateComments(comments);
@@ -44,11 +44,11 @@ class Comments extends React.Component {
 
     return (
       <div className="main">
-        <LoadButton pullPosts={() => this.retrieveComments()} />
+        <LoadButton pullPosts={this.retrieveComments} />
         <ul className="post-wrapper comment-thread">
         { this.props.loading("comments") }
           {comments.filter(c => !c['deleted']).map(comment => (
-            <ThreadComments 
+            <ThreadComments
             key={comment.id}
             comment={comment}
             state={this.props.state}/>

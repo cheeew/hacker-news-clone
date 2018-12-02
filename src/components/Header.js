@@ -8,71 +8,71 @@ const Header = props =>  (
       <ul className="top-nav">
         <li className="logo" to='/' />
         <li>
-          <NavLink 
-            className="link" 
-            exact 
+          <NavLink
+            className="link"
+            exact
             to ='/'>
             {props.company}
           </NavLink>
         </li>
         <li>
-          <NavLink 
-            className="link" 
-            activeClassName="active-link" 
-            exact 
+          <NavLink
+            className="link"
+            activeClassName="active-link"
+            exact
             to="/new">
             new
           </NavLink>
         </li>
         <span>|</span>
         <li>
-          <NavLink 
-            className="link" 
-            activeClassName="active-link" 
-            exact 
+          <NavLink
+            className="link"
+            activeClassName="active-link"
+            exact
             to="/comments">
             comments
           </NavLink>
-        </li> 
+        </li>
         <span>|</span>
         <li>
-          <NavLink 
-            className="link" 
-            activeClassName="active-link" 
-            exact 
+          <NavLink
+            className="link"
+            activeClassName="active-link"
+            exact
             to="/show">
             show
           </NavLink>
-        </li> 
+        </li>
         <span>|</span>
         <li>
-          <NavLink 
-            className="link" 
-            activeClassName="active-link" 
-            exact 
+          <NavLink
+            className="link"
+            activeClassName="active-link"
+            exact
             to="/ask">
             ask
           </NavLink>
-        </li> 
+        </li>
         <span>|</span>
         <li>
-          <NavLink 
-            className="link" 
-            activeClassName="active-link" 
-            exact 
+          <NavLink
+            className="link"
+            activeClassName="active-link"
+            exact
             to="/jobs">
             jobs
           </NavLink>
-        </li> 
+        </li>
       </ul>
     </div>
     <div className="user-portal">
       <ul className="login">
         <li>
-          <NavLink 
-            className="link" 
-            activeClassName="active-link" 
-            exact 
+          <NavLink
+            className="link"
+            activeClassName="active-link"
+            exact
             to="/login">
             login
           </NavLink>

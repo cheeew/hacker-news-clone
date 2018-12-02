@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import getPostAge from "./Helpers";
 import ChildComment from "./ChildComment";
 
-class ThreadComments extends React.Component {  
-  
+class ThreadComments extends React.Component {
+
   createMarkup = () => {
     const { text } = this.props.comment;
     return {__html: text};
@@ -23,7 +23,7 @@ class ThreadComments extends React.Component {
         </ul>
       );
     };
-    
+
     return (
       <li>
         <div className="comment-heading">
@@ -36,27 +36,27 @@ class ThreadComments extends React.Component {
             {` ${getPostAge(time)}`}
           </span>
           { parentPost && parentPost.id !== parent
-            ? <span> |  
-                <Link className="parent-title" 
-                exact="true" 
+            ? <span> |
+                <Link className="parent-title"
+                exact="true"
                 to={`/item/${parent}`}>
                 Parent
-                </Link> | on: 
-                <Link className="parent-title" 
-                exact="true" 
+                </Link> | on:
+                <Link className="parent-title"
+                exact="true"
                 to={`/item/${parentPost.id}`}>
                   {`${parentPost.title}`}
-                </Link> 
+                </Link>
               </span>
             : null  }
 
-          { parentPost && parentPost.id === parent 
-            ? <span> | on: 
-                <Link className="parent-title" 
-                exact="true" 
+          { parentPost && parentPost.id === parent
+            ? <span> | on:
+                <Link className="parent-title"
+                exact="true"
                 to={`/item/${parentPost.id}`}>
                   {`${parentPost.title}`}
-                </Link> 
+                </Link>
               </span>
             : null }
         </div>

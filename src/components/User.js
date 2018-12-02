@@ -3,7 +3,7 @@ import Submissions from "./Submissions";
 import getPostAge, { fetchUser, fetchItems } from "./Helpers";
 
 class User extends React.Component {
-  
+
   async componentDidMount() {
     const { username } = this.props.match.params;
     let user = await fetchUser(username);
@@ -29,8 +29,8 @@ class User extends React.Component {
 
   render() {
     const { created, id, karma, showSubmissions, submitted } = this.props.user;
-    const stories = submitted 
-    ? submitted.filter(sub => sub && sub.type === "story" && !sub.deleted) 
+    const stories = submitted
+    ? submitted.filter(sub => sub && sub.type === "story" && !sub.deleted)
     : null;
 
     return (
@@ -38,24 +38,24 @@ class User extends React.Component {
         <p>{id ? `user: ${id}` : null}</p>
         <p>{created ? `created: ${getPostAge(created)}` : null}</p>
         <p>{karma ? `karma: ${karma}` : null}</p>
-        {karma 
-        ? <p>about: 
+        {karma
+        ? <p>about:
           <span className="subs"
           onClick ={() => this.toggleSubs()}>
-            {typeof submitted[0] === 'number' 
-            ? `${submitted.length} total submissions (parsing post submissions...just one moment)` 
+            {typeof submitted[0] === 'number'
+            ? `${submitted.length} total submissions (parsing post submissions...just one moment)`
             : `${stories.length} stories`}
           </span>
-          </p> 
+          </p>
         : null}
         <ul className="post-wrapper">
-          {showSubmissions === true 
-          ? Object.entries(stories).map(post => ( 
+          {showSubmissions === true
+          ? Object.entries(stories).map(post => (
             <Submissions
             key={post[1].id}
             user={this.props.user}
-            post={post[1]} 
-            index={post[0]} /> 
+            post={post[1]}
+            index={post[0]} />
             ))
           : null}
         </ul>

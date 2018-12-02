@@ -4,7 +4,7 @@ import getPostAge, { shortUrl } from "./Helpers";
 
 class PostListing extends React.Component {
   render() {
-    const {by, descendants, score, time, title, url} = this.props.details; 
+    const {by, descendants, score, time, title, url} = this.props.details;
 
     return (
       <li>

@@ -1,8 +1,8 @@
 import React from 'react';
 import ThreadComments from "./ThreadComments";
 import Disclaimer from "./Disclaimer";
-import getPostAge, { fetchItem, 
-  fetchItems, 
+import getPostAge, { fetchItem,
+  fetchItems,
   shortUrl,
  } from "./Helpers";
 
@@ -19,6 +19,8 @@ class PostThread extends React.Component {
   componentWillUnmount() {
     let currentThread = {...this.props.state.currentThread};
     currentThread.details = {};
+    currentThread.childComments = [];
+    currentThread.comments = [];
     currentThread.id = "";
     this.props.update(currentThread);
   }
@@ -47,7 +49,9 @@ class PostThread extends React.Component {
 
   getChildComments = async () => {
     let container = [];
-    const { comments } = this.props.state.currentThread;
+    let { comments } = this.props.state.currentThread;
+    // remove "null" and untruthy comments
+    comments = comments.filter(c => c);
     for (let comment of comments) {
       const children = comment.kids;
       if(children) await fetchItems(children, container);
@@ -73,6 +77,7 @@ class PostThread extends React.Component {
   render() {
     const { comments } = this.props.state.currentThread;
     const { score, time, title, url, by, descendants, id, type } = this.props.state.currentThread.details;
+    const trueComments = comments.filter(c => c && !c['deleted']);
     return (
       <div className="main post-thread">
         <div>
@@ -82,7 +87,7 @@ class PostThread extends React.Component {
           </div>
           <div className="post-stats">
             <p>{score ? `${score} points by` : null}</p>
-            <p>{by ? `${by}` : null}</p>
+            <p>{by ? by : null}</p>
             <p>{time ? `${getPostAge(time)} |` : null}</p>
             <p>
             {descendants > 0 ? `${descendants} comments` : null}
@@ -94,9 +99,9 @@ class PostThread extends React.Component {
         <div className="comment-container">
           <ul className="comment-thread">
             { this.loading() }
-            {comments.filter(c => !c['deleted']).map(comment => (
-              <ThreadComments key={comment.id} 
-              comment={comment} 
+            {trueComments.map(comment => (
+              <ThreadComments key={comment.id}
+              comment={comment}
               state={this.props.state} />
             ))}
           </ul>
