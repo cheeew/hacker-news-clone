@@ -38,7 +38,9 @@ class PostThread extends React.Component {
     // get all root comments of selected post
     if (comments) {
       await fetchItems(comments, currentThread["comments"]);
-      const childComments = await this.getChildComments();
+      let childComments = await this.getChildComments();
+      // remove "null" and untruthufl comments
+      childComments = childComments.filter(c => c);
       this.props.update(currentThread);
       this.props.updateChildComments(childComments);
     } else {
@@ -50,7 +52,7 @@ class PostThread extends React.Component {
   getChildComments = async () => {
     let container = [];
     let { comments } = this.props.state.currentThread;
-    // remove "null" and untruthy comments
+    // remove "null" and untruthful child comments
     comments = comments.filter(c => c);
     for (let comment of comments) {
       const children = comment.kids;

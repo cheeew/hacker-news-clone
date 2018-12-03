@@ -17,7 +17,7 @@ class ThreadComments extends React.Component {
     const nestComments = () => {
       return (
         <ul className="child-comment-container">
-          {childComments.filter(comment => comment['parent'] === id && !comment['deleted'])
+          {childComments.filter(c => c && c['parent'] === id && !c['deleted'])
             .map(comment => <ChildComment key={comment['id']} details={comment} />
           )}
         </ul>
