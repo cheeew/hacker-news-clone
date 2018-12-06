@@ -23,8 +23,10 @@ class Jobs extends React.Component {
           { this.props.loading('jobs') }
           {Object.entries(this.props.state.posts.jobs).map(post => (
             <PostListing key={post[1]["id"]}
-            index={Number(post[0])}
-            details={post[1]} />
+            index={Number(post[0]) + 1}
+            details={post[1]}
+            state={this.props.state}
+            />
           ))}
         </ul>
       </div>

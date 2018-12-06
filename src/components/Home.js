@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PostListing from "./PostListing";
 import LoadButton from "./LoadButton";
 
@@ -9,7 +10,8 @@ class Home extends Component {
   }
 
   componentDidUpdate() {
-    this.props.updateStorage();
+    const currentPage = this.props.location.pathname;
+    if(currentPage === '/') this.props.updateStorage();
   }
 
   componentWillUnmount() {
@@ -17,24 +19,38 @@ class Home extends Component {
   }
 
   render() {
+    const { page, posts } = this.props.state;
+    const pagination = posts.top.length > 0 ? <p>More</p> : null;
+
     return (
       <div className="main">
-        <LoadButton pullPosts={() => this.props.pullPosts('top')}/>
+        <Link
+        exact='true'
+        to='/'
+        style={{ textDecoration: "none" }}
+        >
+          <LoadButton pullPosts={() => this.props.pullPosts('top')}/>
+        </Link>
         <div className='post-wrapper container'>
           <ul className="post-wrapper">
             { this.props.loading('top') }
-            {Object.entries(this.props.state.posts.top).map(post => (
+            {Object.entries(posts.top).map(post => (
               <PostListing key={post[1]["id"]}
-              index={Number(post[0])}
+              index={Number(post[0]) + 1}
               details={post[1]}
               id={post[1]["id"]}
               state={this.props.state}
               />
             ))}
           </ul>
-          <div className='pagination'>
-            <p onClick={() => this.props.paginate('top')}>More</p>
-          </div>
+          <Link
+          className='pagination'
+          style={{ textDecoration: "none" }}
+          exact='true' to={`/news/page-${page + 1}`}
+          onClick={() => this.props.paginate('top')}
+          >
+            {pagination}
+          </Link>
         </div>
       </div>
     );

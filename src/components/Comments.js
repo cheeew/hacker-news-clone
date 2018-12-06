@@ -41,19 +41,20 @@ class Comments extends React.Component {
 
   render() {
     const { comments } = this.props.state.posts;
-
     return (
       <div className="main">
         <LoadButton pullPosts={this.retrieveComments} />
-        <ul className="post-wrapper comment-thread">
-        { this.props.loading("comments") }
-          {comments.filter(c => !c['deleted']).map(comment => (
-            <ThreadComments
-            key={comment.id}
-            comment={comment}
-            state={this.props.state}/>
-          ))}
-        </ul>
+        <div className='post-wrapper container'>
+          <ul className="post-wrapper comment-thread">
+          { this.props.loading("comments") }
+            {comments.filter(c => !c['deleted']).map(comment => (
+              <ThreadComments
+              key={comment.id}
+              comment={comment}
+              state={this.props.state}/>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

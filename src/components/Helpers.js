@@ -58,7 +58,7 @@ export async function getRecentComments() {
     let id = data - counter;
     const response = await fetchItem(id);
     const story = await response.json();
-    if(story.type === "comment") {
+    if(story && story.type === "comment") {
       comments.push(story);
       counter++;
     } else {
@@ -87,4 +87,16 @@ export async function findStories() {
   }
 
   return bin;
+}
+
+export function paginatePosts(page) {
+  const x = page > 0
+  ? (page * 30)
+  : 0;
+
+  const y = page > 0
+  ? 30 + x
+  : 30;
+
+  return [x, y]
 }

@@ -5,11 +5,15 @@ import getPostAge, { shortUrl } from "./Helpers";
 class PostListing extends React.Component {
   render() {
     const {by, descendants, score, time, title, url} = this.props.details;
+    const { page } = this.props.state;
+    const index = page > 1
+    ? (this.props.index) + ((page - 1) * 30)
+    : this.props.index;
 
     return (
       <li>
         <div className="post">
-          <p>{this.props.index + 1}.</p>
+          <p>{index}.</p>
           <p>
             <a href={url} target={"_blank"}>
               {title}

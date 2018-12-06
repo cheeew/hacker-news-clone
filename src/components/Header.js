@@ -66,19 +66,6 @@ const Header = props =>  (
         </li>
       </ul>
     </div>
-    <div className="user-portal">
-      <ul className="login">
-        <li>
-          <NavLink
-            className="link"
-            activeClassName="active-link"
-            exact
-            to="/login">
-            login
-          </NavLink>
-        </li>
-      </ul>
-    </div>
   </div>
 );
 
