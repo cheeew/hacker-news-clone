@@ -13,13 +13,13 @@ class PostListing extends React.Component {
     return (
       <li>
         <div className="post">
-          <p>{index}.</p>
+          <p className="index">{index}.</p>
           <p>
             <a href={url} target={"_blank"}>
               {title}
             </a>
+            <span>{(url) ? shortUrl(url) : null}</span>
           </p>
-          <div>{(url) ? shortUrl(url) : null}</div>
         </div>
         <div className="post-options">
           <p>{score} points by</p>

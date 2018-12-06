@@ -26,8 +26,8 @@ class Home extends Component {
       <div className="main">
         <Link
         exact='true'
+        className="refresh"
         to='/'
-        style={{ textDecoration: "none" }}
         >
           <LoadButton pullPosts={() => this.props.pullPosts('top')}/>
         </Link>

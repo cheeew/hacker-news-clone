@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LoadButton from './LoadButton';
 import ThreadComments from "./ThreadComments";
 import { findStories } from "./Helpers";
@@ -43,7 +44,13 @@ class Comments extends React.Component {
     const { comments } = this.props.state.posts;
     return (
       <div className="main comments">
-        <LoadButton pullPosts={this.retrieveComments} />
+        <Link
+        exact='true'
+        className="refresh"
+        to='/comments'
+        >
+          <LoadButton pullPosts={this.retrieveComments} />
+        </Link>
         <div className='post-wrapper container'>
           <ul className="post-wrapper comment-thread">
           { this.props.loading("comments") }

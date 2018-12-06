@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import LoadButton from "./LoadButton";
 import PostListing from "./PostListing";
 class Jobs extends React.Component {
@@ -18,7 +19,13 @@ class Jobs extends React.Component {
   render() {
     return (
       <div className="main">
-        <LoadButton pullPosts={() => this.props.pullPosts('jobs')}/>
+        <Link
+        exact='true'
+        className="refresh"
+        to='/jobs'
+        >
+          <LoadButton pullPosts={() => this.props.pullPosts('jobs')}/>
+        </Link>
         <ul className="post-wrapper">
           { this.props.loading('jobs') }
           {Object.entries(this.props.state.posts.jobs).map(post => (

@@ -45,6 +45,17 @@ header {
   flex: 1;
 }
 
+@media (max-width: 750px) {
+  .navigation {
+    height: 35px;
+  }
+
+  .news-link {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .news-links .top-nav {
   display: flex;
   align-items: center;
@@ -55,6 +66,12 @@ header {
 .news-links .top-nav li:nth-child(2) {
   font-weight: 800;
   margin: 0 3px 0 0;
+}
+
+@media (max-width: 365px) {
+  .news-links .top-nav li:nth-child(2) {
+    width: 40px;
+  }
 }
 
 .news-links .top-nav li ~ li {
@@ -70,7 +87,7 @@ header {
   font-size: 13px;
 }
 
-.logo {
+.news-links .logo {
   background: url("../assets/logo.gif");
   background-position: center center;
   width: 18px;
@@ -99,6 +116,14 @@ header {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (max-width: 750px) {
+  .canvas {
+    width: 100vw;
+    margin-top: 0;
+  }
 }
 
 .canvas p {
@@ -112,8 +137,32 @@ header {
   padding-top: 10px;
 }
 
+.main .refresh {
+  text-decoration: none;
+  margin-left: 10px;
+}
+
 .main.comments {
   padding-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .main .refresh {
+    order: -5;
+    align-self: center;
+    padding: 10px 0 15px;
+    margin-left: 0;
+    text-decoration: none;
+  }
+
+  .main .refresh .button-container,
+  .main .refresh .button-background {
+    margin-right: 0;
+  }
 }
 
 /* Button styles */
@@ -122,6 +171,12 @@ header {
   justify-content: flex-end;
   flex: 0;
   height: 30px;
+}
+
+@media (max-width: 750px) {
+  .button-container {
+    margin-right: 15px;
+  }
 }
 
 .button-background {
@@ -189,13 +244,25 @@ header {
 }
 
 .post-wrapper li {
-  margin-bottom: 8px;
-  margin-left: 8px;
+  margin: 0 12px 8px;
+  box-sizing: border-box;
 }
 
 .pagination {
   padding: 10px 0 15px;
   margin-left: 30px;
+}
+
+.pagination:hover p {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-left: 0;
+  }
 }
 
 .pagination p {
@@ -228,6 +295,10 @@ header {
   padding: 0 0;
 }
 
+.post-title {
+  flex: 1;
+}
+
 /* <div className="post"> styles */
 .post {
   display: flex;
@@ -242,22 +313,25 @@ header {
   color: rgba(0, 0, 0, 0.9);
 }
 
-.post div {
-  font-size: 10px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  color: rgb(102, 102, 102);
-  height: 17px;
-  width: 275px;
-  margin-left: 2px;
+.post p span {
+  margin-left: 5px;
   overflow: hidden;
+  cursor: default;
 }
 
 /* <div className="post-options"> styles */
 .post-options {
   display: flex;
-  margin-left: 19px;
+  margin-left: 28px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+@media (max-width: 500px) {
+  .post-options {
+    margin-top: 5px;
+    line-height: 1.6;
+  }
 }
 
 .post-options p,
@@ -283,10 +357,19 @@ span {
   list-style: none;
 }
 
+.post-thread .heading {
+  margin-right: 20px;
+}
+
 .post-thread .post-title {
-  display: flex;
+  /* display: flex; */
   align-items: center;
-  margin: 5px 0 0 25px;
+  margin: 5px 0px 10px 25px;
+  /* flex-wrap: wrap; */
+}
+
+.post-thread .post-title p {
+  display: inline;
 }
 
 .post-thread .post-title a {
@@ -296,16 +379,19 @@ span {
 }
 
 .post-thread .post-title p:last-child {
-  margin: 0 0 0 4px;
+  margin-left: 4px;
   font-size: 10px;
   color: rgba(0, 0, 0, 0.6);
   padding: 0 0 6px;
+  /* flex-wrap: wrap; */
 }
 
 .post-thread .post-stats {
   color: rgba(0, 0, 0, 0.6);
   display: flex;
   margin: -6px 0 0 25px;
+  flex-wrap: wrap;
+  line-height: 1.4;
 }
 
 .post-stats p {
@@ -329,7 +415,7 @@ span {
 
 .disclaimer {
   box-sizing: border-box;
-  margin: 12px 20% 0;
+  margin: 20px 20% 10px;
   padding: 10px 12%;
   text-align: center;
   height: auto;
@@ -483,6 +569,7 @@ span {
 
 .load-screen span {
   font-size: 14px;
+  text-align: center;
 }
 
 .load-screen span:first-child {

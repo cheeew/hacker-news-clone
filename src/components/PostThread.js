@@ -68,7 +68,9 @@ class PostThread extends React.Component {
     return (
       <li className="load-screen">
         <span>Pulling comment thread from HackerNews.</span>
-        <span>This should only take a few seconds.</span>
+        <span>
+          This should only take a moment. If the thread contains over 100 comments it may take just a bit longer.
+        </span>
         <div className="ball-container">
           <span className="ball" />
         </div>
@@ -82,9 +84,11 @@ class PostThread extends React.Component {
     const trueComments = comments.filter(c => c && !c['deleted']);
     return (
       <div className="main post-thread">
-        <div>
+        <div className="heading">
           <div className="post-title">
-            <p><a href={url} target={"_blank"}>{title}</a></p>
+            <p className='title-container'>
+              <a href={url} target={"_blank"}>{title}</a>
+            </p>
             <p>{url ? shortUrl(url) : null}</p>
           </div>
           <div className="post-stats">

@@ -22,7 +22,13 @@ class Ask extends React.Component {
     const pagination = posts.ask.length > 0 ? <p>More</p> : null;
     return (
       <div className="main">
-        <LoadButton pullPosts={() => this.props.pullPosts('ask')}/>
+        <Link
+        exact='true'
+        className="refresh"
+        to='/ask'
+        >
+          <LoadButton pullPosts={() => this.props.pullPosts('ask')}/>
+        </Link>
         <div className='post-wrapper container'>
           <ul className="post-wrapper">
             { this.props.loading('ask') }

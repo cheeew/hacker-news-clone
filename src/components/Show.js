@@ -21,7 +21,13 @@ class Show extends React.Component {
     const pagination = posts.show.length > 0 ? <p>More</p> : null;
     return (
       <div className="main">
-        <LoadButton pullPosts={() => this.props.pullPosts('show')}/>
+        <Link
+        exact='true'
+        className="refresh"
+        to='/'
+        >
+          <LoadButton pullPosts={() => this.props.pullPosts('show')}/>
+        </Link>
         <div className='post-wrapper container'>
           <ul className="post-wrapper">
             { this.props.loading('show') }
