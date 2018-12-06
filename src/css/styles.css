@@ -640,6 +640,19 @@ span {
   color: rgba(0, 0, 0, 0.9);
 }
 
+@media (max-width: 600px) {
+  .main.user {
+    margin-right: 20px;
+  }
+
+  .main.user .post-wrapper li .post span {
+    margin: 3px 0 3px 3px;
+    font-size: 10px;
+    color: #666666;
+    display: inline;
+  }
+}
+
 .main.user .subs {
   margin-left: 5px;
   text-decoration: none;
@@ -654,6 +667,14 @@ span {
 
 .main.user .post-wrapper {
   order: 0;
+}
+
+.main.user .post-wrapper li .post {
+  margin-bottom: 5px;
+}
+
+.main.user .post-wrapper li .post span {
+  color: #666666;
 }
 
 /* Footer Styles */

@@ -10,8 +10,8 @@ const Submissions = props => (
         <a href={props.post.url} target={"_blank"}>
           {props.post.title}
         </a>
+        <span>{(props.post.url) ? shortUrl(props.post.url) : null}</span>
       </p>
-      <div>{(props.post.url) ? shortUrl(props.post.url) : null}</div>
     </div>
     <div className="post-options">
       <p>{props.post.score} points by</p>
