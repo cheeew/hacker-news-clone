@@ -111,6 +111,11 @@ header {
   display: flex;
   padding-top: 10px;
 }
+
+.main.comments {
+  padding-bottom: 20px;
+}
+
 /* Button styles */
 .button-container {
   display: flex;

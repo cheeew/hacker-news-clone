@@ -42,7 +42,7 @@ class Comments extends React.Component {
   render() {
     const { comments } = this.props.state.posts;
     return (
-      <div className="main">
+      <div className="main comments">
         <LoadButton pullPosts={this.retrieveComments} />
         <div className='post-wrapper container'>
           <ul className="post-wrapper comment-thread">

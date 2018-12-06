@@ -136,8 +136,11 @@ import User from "./User";
       <li className="load-screen">
         { category === "comments"
         ? <span>Pulling most recent comments from HackerNews.</span>
-        : <span>Pulling latest posts from HackerNews.</span> }
-        <span>This should only take a few seconds.</span>
+        : <span>Pulling posts from HackerNews.</span> }
+        { category === "comments"
+        ? <span>The comments usually take just a moment longer.</span>
+        : <span>This should only take a moment.</span>
+        }
         <div className="ball-container">
           <span className="ball" />
         </div>
