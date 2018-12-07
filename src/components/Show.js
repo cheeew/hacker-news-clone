@@ -24,7 +24,7 @@ class Show extends React.Component {
         <Link
         exact='true'
         className="refresh"
-        to='/'
+        to='/show'
         >
           <LoadButton pullPosts={() => this.props.pullPosts('show')}/>
         </Link>
