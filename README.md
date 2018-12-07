@@ -8,30 +8,28 @@ Everything here is client-side JS, so there are brief load times when requesting
 
 To refresh all post data you can either refresh the screen or click the "Refresh Posts" button at the top of each page.
 
----
-
 ## Install
 
 Clone this repository:
 
-```console
+```bash
 git clone https://github.com/matthewoctober/hacker-news-clone.git
 ```
 
 Change into the appropriate directory
 
-```console
+```bash
 cd hackernews-clone
 ```
 
 Install all project dependencies:
 
-```console
+```bash
 npm install
 ```
 
 Run the development server
 
-```console
+```bash
 npm run start
 ```
