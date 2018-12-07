@@ -19,6 +19,7 @@ class Show extends React.Component {
   render() {
     const { page, posts } = this.props.state;
     const pagination = posts.show.length > 0 ? <p>More</p> : null;
+    const truePosts = posts.show.filter(post => post);
     return (
       <div className="main">
         <Link
@@ -31,7 +32,7 @@ class Show extends React.Component {
         <div className='post-wrapper container'>
           <ul className="post-wrapper">
             { this.props.loading('show') }
-            {Object.entries(posts.show).map(post => (
+            {Object.entries(truePosts).map(post => (
               <PostListing key={post[1]["id"]}
               index={Number(post[0]) + 1}
               details={post[1]}

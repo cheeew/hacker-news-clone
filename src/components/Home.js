@@ -21,7 +21,7 @@ class Home extends Component {
   render() {
     const { page, posts } = this.props.state;
     const pagination = posts.top.length > 0 ? <p>More</p> : null;
-
+    const truePosts = posts.top.filter(post => post);
     return (
       <div className="main">
         <Link
@@ -34,7 +34,7 @@ class Home extends Component {
         <div className='post-wrapper container'>
           <ul className="post-wrapper">
             { this.props.loading('top') }
-            {Object.entries(posts.top).map(post => (
+            {Object.entries(truePosts).map(post => (
               <PostListing key={post[1]["id"]}
               index={Number(post[0]) + 1}
               details={post[1]}

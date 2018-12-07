@@ -20,6 +20,7 @@ class Ask extends React.Component {
   render() {
     const { page, posts } = this.props.state;
     const pagination = posts.ask.length > 0 ? <p>More</p> : null;
+    const truePosts = posts.ask.filter(post => post);
     return (
       <div className="main">
         <Link
@@ -32,7 +33,7 @@ class Ask extends React.Component {
         <div className='post-wrapper container'>
           <ul className="post-wrapper">
             { this.props.loading('ask') }
-            {Object.entries(posts.ask).map(post => (
+            {Object.entries(truePosts).map(post => (
               <PostListing key={post[1]["id"]}
               index={Number(post[0]) + 1}
               details={post[1]}

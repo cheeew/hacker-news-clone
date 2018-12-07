@@ -22,6 +22,7 @@ class New extends React.Component {
   render() {
     const { page, posts } = this.props.state;
     const pagination = posts.new.length > 0 ? <p>More</p> : null;
+    const truePosts = posts.new.filter(post => post);
     return (
       <div className="main">
         <Link
@@ -34,7 +35,7 @@ class New extends React.Component {
         <div className='post-wrapper container'>
           <ul className="post-wrapper">
             { this.props.loading('new') }
-            {Object.entries(posts.new).map(post => (
+            {Object.entries(truePosts).map(post => (
               <PostListing key={post[1]["id"]}
               index={Number(post[0]) + 1}
               details={post[1]}
