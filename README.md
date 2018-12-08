@@ -18,7 +18,7 @@ Clone this repository:
 git clone https://github.com/matthewoctober/hacker-news-clone.git
 ```
 
-Change into the appropriate directory
+Change into the appropriate directory:
 
 ```bash
 cd hacker-news-clone
@@ -30,7 +30,7 @@ Install all project dependencies:
 npm install
 ```
 
-Run the development server
+Run the development server:
 
 ```bash
 npm run start
