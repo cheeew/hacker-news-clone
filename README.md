@@ -1,6 +1,6 @@
 # Hacker News Clone
 
-<img src="https://www.matthewoctober.com/static/hnClone-40b991092906625d835ca0c906f68f19-37f02.png" alt="Hacker News Clone" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5)" />
+<img src="./public/hackernews.png" alt="Hacker News Clone" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5)" />
 
 Using React and Hacker News' API, I decided to create my own Hacker News Clone.
 
